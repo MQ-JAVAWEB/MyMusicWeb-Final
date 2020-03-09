@@ -29,6 +29,10 @@ public interface ManagerMapper {
     int updateByPrimaryKeySelective(Manager record);
 
     int updateByPrimaryKey(Manager record);
-    
+
     Manager queryManagerLogin(Map<String, Object> paramMap);
+
+    List<Manager> queryList(Map paramMap);
+
+    Integer queryCount(Map paramMap);
 }
