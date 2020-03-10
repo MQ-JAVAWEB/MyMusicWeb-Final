@@ -4,10 +4,15 @@ import com.mq.music.Exception.LoginFailException;
 import com.mq.music.bean.Manager;
 import com.mq.music.mapper.ManagerMapper;
 import com.mq.music.service.ManagerService;
+import com.mq.music.util.Const;
+import com.mq.music.util.MD5Util;
 import com.mq.music.util.Page;
+import com.mq.music.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +60,24 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public int savaManager(Manager manager) {
-
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date=new Date();
+        String createtime=sdf.format(date);
+        manager.setCreatetime(createtime);
+        manager.setPassword(MD5Util.digest(Const.PASSWORD));
         return  managerMapper.insert(manager);
+    }
+
+    @Override
+    public int deleteManager(Integer id) {
+        return managerMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteManagerBatch(Data data) {
+
+
+
+        return  managerMapper.deleteManagerBatch(data);
     }
 }

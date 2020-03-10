@@ -19,12 +19,6 @@ public class LoginController {
     @Autowired
     private ManagerService managerService;
 
-//    @RequestMapping("/getAllManager")
-//    @ResponseBody
-//    public List<Messager> getAllManager(){
-//        List<Messager> manager= messagerService.getAllManager();
-//        return manager;
-//    }
 
     @RequestMapping("/login")
     public String login(){
@@ -62,8 +56,14 @@ public class LoginController {
     public String main(){
         return "backstage/main";
     }
-     @RequestMapping("/toManagerList")
-    public String toManagerList(){
-        return "manager/managerList";
+    // @RequestMapping("/toManagerList")
+//    public String toManagerList(){
+//        return "manager/managerList";
+//    }
+    @RequestMapping("/logout")
+    public String logout(){
+
+        return "redirect:/login";
     }
+
 }

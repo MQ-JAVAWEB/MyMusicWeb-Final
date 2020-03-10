@@ -11,6 +11,8 @@ public class Singer implements Serializable {
 
     private String sex;
 
+    private String introduce;
+
     private String singerType;
 
     private String songType;
@@ -63,5 +65,13 @@ public class Singer implements Serializable {
 
     public void setSongType(String songType) {
         this.songType = songType == null ? null : songType.trim();
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
     }
 }

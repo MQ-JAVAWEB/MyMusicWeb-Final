@@ -27,10 +27,10 @@
             </header>
             <form th:action="@{/dologin}" method="post" id="loginForm">
                 <div class="form-group">
-                    <input type="text" id="fusername" placeholder="请输入用户名" name="username" class="form-control rounded input-lg text-center no-border">
+                    <input type="text" id="fusername" placeholder="请输入用户名" value="superadmin" name="username" class="form-control rounded input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="fpassword" placeholder="请输入密码" name="password" class="form-control rounded input-lg text-center no-border">
+                    <input type="password" id="fpassword" placeholder="请输入密码" value="123" name="password" class="form-control rounded input-lg text-center no-border">
                 </div>
                 <select id="ftype" name="type" class="form-control rounded input-lg text-center no-border" >
                     <option value="member">用户</option>

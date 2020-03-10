@@ -1,10 +1,12 @@
 package com.mq.music.mapper;
 
+import com.mq.music.bean.Manager;
 import com.mq.music.bean.Singer;
 import com.mq.music.bean.SingerExample;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SingerMapper {
     long countByExample(SingerExample example);
@@ -28,4 +30,8 @@ public interface SingerMapper {
     int updateByPrimaryKeySelective(Singer record);
 
     int updateByPrimaryKey(Singer record);
+
+    List<Manager> queryList(Map paramMap);
+
+    Integer queryCount(Map paramMap);
 }

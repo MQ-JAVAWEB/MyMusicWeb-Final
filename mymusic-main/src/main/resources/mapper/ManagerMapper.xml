@@ -6,10 +6,10 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="realname" jdbcType="VARCHAR" property="realname" />
-    <result column="sex" jdbcType="VARCHAR" property="sex" />
+
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="createtime" jdbcType="CHAR" property="createtime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,8 +70,41 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, realname, sex, email, phone, createtime
+    id, username, password, realname,  email, phone, createtime
   </sql>
+  <select id="queryManagerLogin" parameterType="map" resultMap="BaseResultMap">
+    select  * from  t_manager where  username=#{username}
+    and password =#{password}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap">
+    select * from t_manager
+    <where>
+      <if test="queryText!=null">username like concat("%",#{queryText},"%")
+                                 or realname like concat("%",#{queryText},"%")
+                                 or email like concat("%",#{queryText},"%")
+                                or phone like concat("%",#{queryText},"%")
+      </if>
+    </where>
+    order by createtime desc
+
+    limit #{startIndex},#{pagesize}
+  </select>
+
+  <select id="queryCount"  resultType="int">
+    select count(*) from t_manager
+    <where>
+      <if test="queryText!=null">username like concat("%",#{queryText},"%")</if>
+    </where>
+  </select>
+
+  <delete id="deleteManagerBatch">
+
+    delete from t_manager
+    where id in
+    <foreach collection="datas" open="(" close=")" separator="," item="manager">
+      #{manager.id}
+    </foreach>
+  </delete>
   <select id="selectByExample" parameterType="com.mq.music.bean.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -103,11 +136,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mq.music.bean.Manager">
-    insert into t_manager (id, username, password, 
-      realname, sex, email, 
+    insert into t_manager ( username, password,
+      realname, email,
       phone, createtime)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{realname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{realname,jdbcType=VARCHAR},  #{email,jdbcType=VARCHAR},
       #{phone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mq.music.bean.Manager">
@@ -125,9 +158,7 @@
       <if test="realname != null">
         realname,
       </if>
-      <if test="sex != null">
-        sex,
-      </if>
+
       <if test="email != null">
         email,
       </if>
@@ -151,9 +182,7 @@
       <if test="realname != null">
         #{realname,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        #{sex,jdbcType=VARCHAR},
-      </if>
+
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -165,10 +194,6 @@
       </if>
     </trim>
   </insert>
-  <select id="queryManagerLogin" parameterType="map" resultType="com.mq.music.bean.Manager">
-  	select * from t_messager where
-  	username=#{username} and password=#{password}
-  </select>
   <select id="countByExample" parameterType="com.mq.music.bean.ManagerExample" resultType="java.lang.Long">
     select count(*) from t_manager
     <if test="_parameter != null">
@@ -190,9 +215,7 @@
       <if test="record.realname != null">
         realname = #{record.realname,jdbcType=VARCHAR},
       </if>
-      <if test="record.sex != null">
-        sex = #{record.sex,jdbcType=VARCHAR},
-      </if>
+
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
@@ -213,7 +236,7 @@
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       realname = #{record.realname,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=VARCHAR},
+
       email = #{record.email,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP}
@@ -233,9 +256,7 @@
       <if test="realname != null">
         realname = #{realname,jdbcType=VARCHAR},
       </if>
-      <if test="sex != null">
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
+
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -253,7 +274,7 @@
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       realname = #{realname,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
+
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP}

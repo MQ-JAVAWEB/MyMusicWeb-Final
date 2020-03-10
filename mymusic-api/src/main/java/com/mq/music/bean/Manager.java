@@ -1,7 +1,6 @@
 package com.mq.music.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Manager implements Serializable {
     private Integer id;
@@ -12,13 +11,13 @@ public class Manager implements Serializable {
 
     private String realname;
 
-    private String sex;
+
 
     private String email;
 
     private String phone;
 
-    private Date createtime;
+    private String createtime;
 
     private static final long serialVersionUID = 1L;
 
@@ -54,13 +53,6 @@ public class Manager implements Serializable {
         this.realname = realname == null ? null : realname.trim();
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
 
     public String getEmail() {
         return email;
@@ -78,11 +70,11 @@ public class Manager implements Serializable {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 }

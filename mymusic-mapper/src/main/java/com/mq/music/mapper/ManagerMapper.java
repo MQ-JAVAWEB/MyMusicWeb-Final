@@ -2,6 +2,7 @@ package com.mq.music.mapper;
 
 import com.mq.music.bean.Manager;
 import com.mq.music.bean.ManagerExample;
+import com.mq.music.vo.Data;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -35,4 +36,6 @@ public interface ManagerMapper {
     List<Manager> queryList(Map paramMap);
 
     Integer queryCount(Map paramMap);
+
+    int deleteManagerBatch(Data data);
 }
