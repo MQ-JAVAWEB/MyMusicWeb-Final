@@ -25,25 +25,26 @@ THE SOFTWARE.
  * Added changerequest from Thodoris Greasidis
  * It makes growing more 
  */
-(function ($){
+(function ($) {
     "use strict";
     var pluginName = "grow", pluginVersion = "0.4";
-    var options ={
+    var options = {
         series: {
             grow: {
                 active: false,
                 stepDelay: 20,
-                steps:100,
-                growings:[
+                steps: 100,
+                growings: [
                     {
                         valueIndex: 1,
                         stepMode: "linear",
                         stepDirection: "up"
-                    }                    
+                    }
                 ]
             }
         }
     };
+
     function init(plot) {
         var done = false;
         var growfunc;
@@ -54,107 +55,128 @@ THE SOFTWARE.
         var valueIndex;
         plot.hooks.bindEvents.push(processbindEvents);
         plot.hooks.drawSeries.push(processSeries);
-        plot.hooks.shutdown.push(shutdown);		
-        function processSeries(plot, canvascontext, series){
+        plot.hooks.shutdown.push(shutdown);
+
+        function processSeries(plot, canvascontext, series) {
             opt = plot.getOptions();
             valueIndex = opt.series.grow.valueIndex;
-            if(opt.series.grow.active === true){
-                if (done === false){
+            if (opt.series.grow.active === true) {
+                if (done === false) {
                     data = plot.getData();
                     data.actualStep = 0;
                     data.growingIndex = 0;
-                    for (var j = 0; j < data.length; j++){
+                    for (var j = 0; j < data.length; j++) {
                         data[j].dataOrg = clone(data[j].data);
-                        for (var i = 0; i < data[j].data.length; i++){ data[j].data[i][valueIndex] = 0;}
+                        for (var i = 0; i < data[j].data.length; i++) {
+                            data[j].data[i][valueIndex] = 0;
+                        }
                     }
                     plot.setData(data);
                     done = true;
                 }
             }
         }
-        function processbindEvents(plot,eventHolder){
+
+        function processbindEvents(plot, eventHolder) {
             opt = plot.getOptions();
-            if (opt.series.grow.active === true){
+            if (opt.series.grow.active === true) {
                 var d = plot.getData();
                 for (var j = 0; j < data.length; j++) {
                     opt.series.grow.steps = Math.max(opt.series.grow.steps, d[j].grow.steps);
                 }
-                if(opt.series.grow.stepDelay === 0){ opt.series.grow.stepDelay++;}
+                if (opt.series.grow.stepDelay === 0) {
+                    opt.series.grow.stepDelay++;
+                }
                 growingLoop();
                 if (isPluginRegistered("resize")) {
                     plot.getPlaceholder().bind("resize", onResize);
                 }
             }
         }
-        function growingLoop(){
+
+        function growingLoop() {
             var growing, startTime = new Date(), timeDiff;
-            if (data.actualStep < opt.series.grow.steps){
+            if (data.actualStep < opt.series.grow.steps) {
                 data.actualStep++;
-                for(var j = 0; j < data.length; j++){
-                    for(var g = 0; g < data[j].grow.growings.length; g++){
+                for (var j = 0; j < data.length; j++) {
+                    for (var g = 0; g < data[j].grow.growings.length; g++) {
                         growing = data[j].grow.growings[g];
-                        if (typeof growing.stepMode === "function"){
-                            growing.stepMode(data[j],data.actualStep,growing);
-                        }
-                        else{
-                            if (growing.stepMode === "linear"){ growLinear();}
-                            else if (growing.stepMode === "maximum"){ growMaximum();}
-                            else if (growing.stepMode === "delay"){ growDelay();}
-                            else{growNone();}
+                        if (typeof growing.stepMode === "function") {
+                            growing.stepMode(data[j], data.actualStep, growing);
+                        } else {
+                            if (growing.stepMode === "linear") {
+                                growLinear();
+                            } else if (growing.stepMode === "maximum") {
+                                growMaximum();
+                            } else if (growing.stepMode === "delay") {
+                                growDelay();
+                            } else {
+                                growNone();
+                            }
                         }
                     }
                 }
                 plt.setData(data);
                 plt.draw();
                 timeDiff = new Date() - startTime;
-                growfunc = window.setTimeout(growingLoop, Math.max(0,opt.series.grow.stepDelay - timeDiff));
+                growfunc = window.setTimeout(growingLoop, Math.max(0, opt.series.grow.stepDelay - timeDiff));
+            } else {
+                window.clearTimeout(growfunc);
+                growfunc = null;
             }
-            else{ window.clearTimeout(growfunc); growfunc = null; }
-            function growNone(){
-                if (data.actualStep === 1){
-                    for (var i = 0; i < data[j].data.length; i++){
+
+            function growNone() {
+                if (data.actualStep === 1) {
+                    for (var i = 0; i < data[j].data.length; i++) {
                         data[j].data[i][valueIndex] = data[j].dataOrg[i][growing.valueIndex];
                     }
                 }
             }
-            function growLinear(){
-                if (data.actualStep <= data[j].grow.steps){
-                    for (var i = 0; i < data[j].data.length; i++){	
-                        if (growing.stepDirection === "up"){	
+
+            function growLinear() {
+                if (data.actualStep <= data[j].grow.steps) {
+                    for (var i = 0; i < data[j].data.length; i++) {
+                        if (growing.stepDirection === "up") {
                             data[j].data[i][growing.valueIndex] = data[j].dataOrg[i][growing.valueIndex] / data[j].grow.steps * data.actualStep;
-                        }
-                        else if(growing.stepDirection === "down"){
-                            data[j].data[i][growing.valueIndex] = data[j].dataOrg[i][growing.valueIndex] + (data[j].yaxis.max - data[j].dataOrg[i][growing.valueIndex]) / data[j].grow.steps * (data[j].grow.steps - data.actualStep); 
+                        } else if (growing.stepDirection === "down") {
+                            data[j].data[i][growing.valueIndex] = data[j].dataOrg[i][growing.valueIndex] + (data[j].yaxis.max - data[j].dataOrg[i][growing.valueIndex]) / data[j].grow.steps * (data[j].grow.steps - data.actualStep);
                         }
                     }
                 }
             }
-            function growMaximum(){
-                if (data.actualStep <= data[j].grow.steps){
-                    for (var i = 0; i < data[j].data.length; i++){
-                        if (growing.stepDirection === "up"){
+
+            function growMaximum() {
+                if (data.actualStep <= data[j].grow.steps) {
+                    for (var i = 0; i < data[j].data.length; i++) {
+                        if (growing.stepDirection === "up") {
                             data[j].data[i][growing.valueIndex] = Math.min(data[j].dataOrg[i][growing.valueIndex], data[j].yaxis.max / data[j].grow.steps * data.actualStep);
-                        }
-                        else if (growing.stepDirection === "down"){
-                            data[j].data[i][growing.valueIndex] = Math.max(data[j].dataOrg[i][growing.valueIndex], data[j].yaxis.max / data[j].grow.steps * (data[j].grow.steps - data.actualStep) ); 
+                        } else if (growing.stepDirection === "down") {
+                            data[j].data[i][growing.valueIndex] = Math.max(data[j].dataOrg[i][growing.valueIndex], data[j].yaxis.max / data[j].grow.steps * (data[j].grow.steps - data.actualStep));
                         }
                     }
                 }
             }
-            function growDelay(){
-                if (data.actualStep == data[j].grow.steps){
-                    for (var i = 0; i < data[j].data.length; i++){
+
+            function growDelay() {
+                if (data.actualStep == data[j].grow.steps) {
+                    for (var i = 0; i < data[j].data.length; i++) {
                         data[j].data[i][growing.valueIndex] = data[j].dataOrg[i][growing.valueIndex];
                     }
                 }
             }
         }
+
         function onResize() {
-            if (growfunc) { window.clearTimeout(growfunc); growfunc = null; }
+            if (growfunc) {
+                window.clearTimeout(growfunc);
+                growfunc = null;
+            }
         }
+
         function shutdown(plot, eventHolder) {
             plot.getPlaceholder().unbind("resize", onResize);
         }
+
         function isPluginRegistered(pluginName) {
             var plugins = $.plot.plugins;
             for (var i = 0, len = plugins.length; i < len; i++) {
@@ -165,13 +187,19 @@ THE SOFTWARE.
             }
             return false;
         }
-        function clone(obj){
-            if(obj === null || typeof(obj) !== 'object'){ return obj;}
+
+        function clone(obj) {
+            if (obj === null || typeof (obj) !== 'object') {
+                return obj;
+            }
             var temp = new obj.constructor();
-            for(var key in obj){temp[key] = clone(obj[key]); }
+            for (var key in obj) {
+                temp[key] = clone(obj[key]);
+            }
             return temp;
         }
     }
+
     $.plot.plugins.push({
         init: init,
         options: options,

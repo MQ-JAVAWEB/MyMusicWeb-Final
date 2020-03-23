@@ -7,7 +7,7 @@ public class Comment implements Serializable {
 
     private String songId;
 
-    private String userId;
+    private String username;
 
     private String content;
 
@@ -29,12 +29,12 @@ public class Comment implements Serializable {
         this.songId = songId == null ? null : songId.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getContent() {

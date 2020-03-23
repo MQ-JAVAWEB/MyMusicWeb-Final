@@ -2,9 +2,11 @@ package com.mq.music.mapper;
 
 import com.mq.music.bean.Song;
 import com.mq.music.bean.SongExample;
+import com.mq.music.vo.Data;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SongMapper {
     long countByExample(SongExample example);
@@ -28,4 +30,10 @@ public interface SongMapper {
     int updateByPrimaryKeySelective(Song record);
 
     int updateByPrimaryKey(Song record);
+
+    List<Song> queryList(Map paramMap);
+
+    Integer queryCount(Map paramMap);
+
+    int deleteBachMusic(Data data);
 }

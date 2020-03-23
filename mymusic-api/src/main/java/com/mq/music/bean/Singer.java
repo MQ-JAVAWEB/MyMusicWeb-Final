@@ -15,8 +15,6 @@ public class Singer implements Serializable {
 
     private String singerType;
 
-    private String songType;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -57,14 +55,6 @@ public class Singer implements Serializable {
 
     public void setSingerType(String singerType) {
         this.singerType = singerType == null ? null : singerType.trim();
-    }
-
-    public String getSongType() {
-        return songType;
-    }
-
-    public void setSongType(String songType) {
-        this.songType = songType == null ? null : songType.trim();
     }
 
     public String getIntroduce() {

@@ -36,7 +36,7 @@
 }
 
 @media (max-width: 767px) {
-    #world_map{
+    #world_map {
         height: 240px;
     }
 }

@@ -30,10 +30,10 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Manager queryManagerLogin(Map<String, Object> paramMap) {
-        Manager manager=managerMapper.queryManagerLogin(paramMap);
+        Manager manager = managerMapper.queryManagerLogin(paramMap);
 
-        if (manager==null) {
-            throw  new LoginFailException("用户名或密码错误");
+        if (manager == null) {
+            throw new LoginFailException("用户名或密码错误");
 
         }
         return manager;
@@ -41,17 +41,16 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public Page queryPage(Map paramMap) {
-        Page page=new Page((Integer)paramMap.get("pageno"),(Integer)paramMap.get("pagesize"));
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
 
-        Integer startIndex=page.getStartIndex();
+        Integer startIndex = page.getStartIndex();
         paramMap.put("startIndex", startIndex);
 
-
-        List<Manager> datas=managerMapper.queryList(paramMap);
+        List<Manager> datas = managerMapper.queryList(paramMap);
 
         page.setDatas(datas);
 
-        Integer totalsize=managerMapper.queryCount(paramMap);
+        Integer totalsize = managerMapper.queryCount(paramMap);
 
         page.setTotalsize(totalsize);
 
@@ -60,12 +59,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public int savaManager(Manager manager) {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date=new Date();
-        String createtime=sdf.format(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String createtime = sdf.format(date);
         manager.setCreatetime(createtime);
         manager.setPassword(MD5Util.digest(Const.PASSWORD));
-        return  managerMapper.insert(manager);
+        return managerMapper.insert(manager);
     }
 
     @Override
@@ -76,8 +75,6 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public int deleteManagerBatch(Data data) {
 
-
-
-        return  managerMapper.deleteManagerBatch(data);
+        return managerMapper.deleteManagerBatch(data);
     }
 }

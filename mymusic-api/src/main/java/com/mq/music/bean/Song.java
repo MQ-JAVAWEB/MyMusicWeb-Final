@@ -1,7 +1,6 @@
 package com.mq.music.bean;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Song implements Serializable {
     private Integer id;
@@ -14,7 +13,7 @@ public class Song implements Serializable {
 
     private String url;
 
-    private Date createtime;
+    private String createtime;
 
     private String songType;
 
@@ -62,11 +61,11 @@ public class Song implements Serializable {
         this.url = url == null ? null : url.trim();
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 

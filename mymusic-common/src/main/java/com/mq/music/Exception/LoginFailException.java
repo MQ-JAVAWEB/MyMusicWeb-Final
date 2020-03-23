@@ -1,12 +1,12 @@
 package com.mq.music.Exception;
 
 public class LoginFailException extends RuntimeException {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public LoginFailException(String message){
-		super(message);
-	}
+    public LoginFailException(String message) {
+        super(message);
+    }
 }

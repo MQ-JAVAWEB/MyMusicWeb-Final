@@ -5,17 +5,19 @@ import java.io.Serializable;
 public class Album implements Serializable {
     private Integer id;
 
-    private Integer singerid;
+    private String singer;
 
-    private String name;
+    private String albumName;
 
-    private String url;
+
 
     private String picture;
 
     private String introduce;
 
-    private String type;
+
+
+
 
     private static final long serialVersionUID = 1L;
 
@@ -27,29 +29,23 @@ public class Album implements Serializable {
         this.id = id;
     }
 
-    public Integer getSingerid() {
-        return singerid;
+    public String getSinger() {
+        return singer;
     }
 
-    public void setSingerid(Integer singerid) {
-        this.singerid = singerid;
+    public void setSinger(String singer) {
+        this.singer = singer;
     }
 
-    public String getName() {
-        return name;
+    public String getAlbumName() {
+        return albumName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName == null ? null : albumName.trim();
     }
 
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
 
     public String getPicture() {
         return picture;
@@ -67,11 +63,5 @@ public class Album implements Serializable {
         this.introduce = introduce == null ? null : introduce.trim();
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
 }

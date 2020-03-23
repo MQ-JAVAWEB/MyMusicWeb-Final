@@ -11,8 +11,6 @@ public class Manager implements Serializable {
 
     private String realname;
 
-
-
     private String email;
 
     private String phone;
@@ -52,7 +50,6 @@ public class Manager implements Serializable {
     public void setRealname(String realname) {
         this.realname = realname == null ? null : realname.trim();
     }
-
 
     public String getEmail() {
         return email;

@@ -1,243 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mq.music.mapper.AlbumMapper">
-  <resultMap id="BaseResultMap" type="com.mq.music.bean.Album">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="singerid" jdbcType="INTEGER" property="singerid" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="picture" jdbcType="VARCHAR" property="picture" />
-    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.mq.music.bean.Album">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="singer" jdbcType="VARCHAR" property="singer"/>
+        <result column="albumName" jdbcType="VARCHAR" property="albumName"/>
+        <result column="picture" jdbcType="VARCHAR" property="picture"/>
+        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, singer, albumName,picture, introduce
+    </sql>
+    <select id="selectByExample" parameterType="com.mq.music.bean.AlbumExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, singerid, name, url, picture, introduce, type
-  </sql>
-  <select id="selectByExample" parameterType="com.mq.music.bean.AlbumExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_album
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from t_album
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from t_album
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.mq.music.bean.AlbumExample">
-    delete from t_album
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.mq.music.bean.Album">
-    insert into t_album (id, singerid, name, 
-      url, picture, introduce, 
-      type)
-    values (#{id,jdbcType=INTEGER}, #{singerid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mq.music.bean.Album">
-    insert into t_album
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="singerid != null">
-        singerid,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="picture != null">
-        picture,
-      </if>
-      <if test="introduce != null">
-        introduce,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="singerid != null">
-        #{singerid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null">
-        #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="introduce != null">
-        #{introduce,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.mq.music.bean.AlbumExample" resultType="java.lang.Long">
-    select count(*) from t_album
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_album
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.singerid != null">
-        singerid = #{record.singerid,jdbcType=INTEGER},
-      </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.url != null">
-        url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.picture != null">
+        <include refid="Base_Column_List"/>
+        from t_album
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_album
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_album
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.mq.music.bean.AlbumExample">
+        delete from t_album
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.mq.music.bean.Album">
+        insert into t_album (id, singer, albumName,
+         picture, introduce)
+        values (#{id},
+        #{singer},
+        #{albumName},
+        #{picture},
+        #{introduce})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mq.music.bean.Album">
+        insert into t_album
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="singer != null">
+                singer,
+            </if>
+            <if test="albumName != null">
+                albumName,
+            </if>
+
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="introduce != null">
+                introduce
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="singer != null">
+                #{singer,jdbcType=VARCHAR},
+            </if>
+            <if test="albumName != null">
+                #{albumName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=VARCHAR}
+            </if>
+
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.mq.music.bean.AlbumExample" resultType="java.lang.Long">
+        select count(*) from t_album
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_album
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.singer != null">
+                singer = #{record.singer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.albumName != null">
+                albumName = #{record.albumName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="record.picture != null">
+                picture = #{record.picture,jdbcType=VARCHAR},
+            </if>
+            <if test="record.introduce != null">
+                introduce = #{record.introduce,jdbcType=VARCHAR}
+            </if>
+
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update t_album
+        set id = #{record.id,jdbcType=INTEGER},
+        singer = #{record.singer,jdbcType=VARCHAR},
+        albumName = #{record.albumName,jdbcType=VARCHAR},
+
         picture = #{record.picture,jdbcType=VARCHAR},
-      </if>
-      <if test="record.introduce != null">
-        introduce = #{record.introduce,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_album
-    set id = #{record.id,jdbcType=INTEGER},
-      singerid = #{record.singerid,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      url = #{record.url,jdbcType=VARCHAR},
-      picture = #{record.picture,jdbcType=VARCHAR},
-      introduce = #{record.introduce,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mq.music.bean.Album">
-    update t_album
-    <set>
-      <if test="singerid != null">
-        singerid = #{singerid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="picture != null">
+        introduce = #{record.introduce,jdbcType=VARCHAR}
+
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mq.music.bean.Album">
+        update t_album
+        <set>
+            <if test="singer != null">
+                singer = #{singer,jdbcType=VARCHAR},
+            </if>
+            <if test="albumName != null">
+                albumName = #{albumName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=VARCHAR}
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mq.music.bean.Album">
+        update t_album
+        set singer = #{singer,jdbcType=VARCHAR},
+        albumName = #{albumName,jdbcType=VARCHAR},
+
         picture = #{picture,jdbcType=VARCHAR},
-      </if>
-      <if test="introduce != null">
-        introduce = #{introduce,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mq.music.bean.Album">
-    update t_album
-    set singerid = #{singerid,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=VARCHAR},
-      introduce = #{introduce,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        introduce = #{introduce,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="queryList" resultMap="BaseResultMap">
+        select * from t_album
+        <where>
+            <if test="queryText!=null">albumName like concat("%",#{queryText},"%")
+                or singer like concat("%",#{queryText},"%")
+
+            </if>
+        </where>
+        order by albumName DESC
+
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <select id="queryCount" resultType="int">
+        select count(*) from t_album
+        <where>
+            <if test="queryText!=null">albumName like concat("%",#{queryText},"%")</if>
+        </where>
+    </select>
+
+    <delete id="deleteBachAlbum">
+
+        delete  from t_album
+        where id in
+        <foreach collection="datasAlbum" open="(" close=")" separator="," item="album">
+            #{album.id}
+        </foreach>
+    </delete>
+
 </mapper>

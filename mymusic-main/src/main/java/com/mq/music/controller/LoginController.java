@@ -19,26 +19,25 @@ public class LoginController {
     @Autowired
     private ManagerService managerService;
 
-
-    @RequestMapping("/login")
-    public String login(){
+    @RequestMapping("/")
+    public String login() {
         return "login";
     }
 
     @ResponseBody
     @RequestMapping("/dologin")
-    public Object doLogin(String username,String password,String type,
-                          HttpSession session){
+    public Object doLogin(String username, String password, String type,
+                          HttpSession session) {
 
-        AjaxResult result=new AjaxResult();
+        AjaxResult result = new AjaxResult();
 
         try {
-            Map<String,Object> paramMap=new HashMap<String,Object>();
+            Map<String, Object> paramMap = new HashMap<String, Object>();
             paramMap.put("username", username);
             paramMap.put("password", MD5Util.digest(password));
             paramMap.put("type", type);
 
-            Manager manager=managerService.queryManagerLogin(paramMap);
+            Manager manager = managerService.queryManagerLogin(paramMap);
 
             session.setAttribute(Const.LOGIN_MANAGER, manager);
 
@@ -53,17 +52,18 @@ public class LoginController {
     }
 
     @RequestMapping("/main")
-    public String main(){
+    public String main() {
         return "backstage/main";
     }
+
     // @RequestMapping("/toManagerList")
 //    public String toManagerList(){
 //        return "manager/managerList";
 //    }
     @RequestMapping("/logout")
-    public String logout(){
+    public String logout() {
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 }

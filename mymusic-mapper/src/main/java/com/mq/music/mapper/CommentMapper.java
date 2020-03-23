@@ -2,9 +2,11 @@ package com.mq.music.mapper;
 
 import com.mq.music.bean.Comment;
 import com.mq.music.bean.CommentExample;
+import com.mq.music.vo.Data;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommentMapper {
     long countByExample(CommentExample example);
@@ -28,4 +30,12 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);
+
+
+
+    List<Comment> queryList(Map paramMap);
+
+    Integer queryCount(Map paramMap);
+
+    int deleteBachComment(Data data);
 }

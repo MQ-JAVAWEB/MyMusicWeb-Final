@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="app" xmlns:th="http://www.thymeleaf.org" taglib>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Musik | Web Application</title>
-    <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <link rel="stylesheet" th:href="@{css/bootstrap.css}" type="text/css" />
-    <link rel="stylesheet" th:href="@{css/animate.css}" type="text/css" />
-    <link rel="stylesheet" th:href="@{css/font-awesome.min.css}" type="text/css" />
-    <link rel="stylesheet" th:href="@{css/simple-line-icons.css}" type="text/css" />
-    <link rel="stylesheet" th:href="@{css/font.css}" type="text/css" />
-    <link rel="stylesheet" th:href="@{css/app.css}" type="text/css" />
+    <meta name="description"
+          content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/animate.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/font-awesome.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/simple-line-icons.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/font.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{css/app.css}" type="text/css"/>
     <!--[if lt IE 9]>
     <script th:srv="@{js/ie/html5shiv.js}"></script>
     <script th:src="@{js/ie/respond.min.js}"></script>
@@ -27,19 +28,24 @@
             </header>
             <form th:action="@{/dologin}" method="post" id="loginForm">
                 <div class="form-group">
-                    <input type="text" id="fusername" placeholder="请输入用户名" value="superadmin" name="username" class="form-control rounded input-lg text-center no-border">
+                    <input type="text" id="fusername" placeholder="请输入用户名" value="superadmin" name="username"
+                           class="form-control rounded input-lg text-center no-border">
                 </div>
                 <div class="form-group">
-                    <input type="password" id="fpassword" placeholder="请输入密码" value="123" name="password" class="form-control rounded input-lg text-center no-border">
+                    <input type="password" id="fpassword" placeholder="请输入密码" value="123" name="password"
+                           class="form-control rounded input-lg text-center no-border">
                 </div>
-                <select id="ftype" name="type" class="form-control rounded input-lg text-center no-border" >
+                <select id="ftype" name="type" class="form-control rounded input-lg text-center no-border">
                     <option value="member">用户</option>
                     <option value="user">管理员</option>
                 </select>
                 <div class="line line-dashed"></div>
                 <div class="line line-dashed"></div>
-                <a  onclick="dologin()" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></a>
-                <div class="text-center m-t m-b"><a href="#"><small></small></a></div>
+                <a onclick="dologin()" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i
+                        class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></a>
+                <div class="text-center m-t m-b"><a href="#">
+                    <small></small>
+                </a></div>
                 <div class="line line-dashed"></div>
 
             </form>
@@ -65,7 +71,7 @@
 <script type="text/javascript" th:src="@{js/jPlayer/jquery.jplayer.min.js}"></script>
 <script type="text/javascript" th:src="@{js/jPlayer/add-on/jplayer.playlist.min.js}"></script>
 <script type="text/javascript" th:src="@{js/jPlayer/demo.js}"></script>
-<script type="text/javascript" th:src="@{layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{backstage/jquery/layer/layer.js}"></script>
 <script>
     function dologin() {
 
@@ -75,7 +81,13 @@
 
         if ($.trim(fusername.val()) == "") {
             // alert("用户名不能为空，请重新输入");
-            layer.msg("<a style='color:red;'>用户名不能为空，请重新输入</a>", {tips:[3,"red"],time: 1000, icon: 5, shift: 6,anim: 1}, function () {
+            layer.msg("<a style='color:red;'>用户名不能为空，请重新输入</a>", {
+                tips: [3, "red"],
+                time: 1000,
+                icon: 5,
+                shift: 6,
+                anim: 1
+            }, function () {
                 fusername.val("");
                 fusername.focus;
             });
