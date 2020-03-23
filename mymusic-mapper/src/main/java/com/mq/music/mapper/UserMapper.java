@@ -5,6 +5,7 @@ import com.mq.music.bean.UserExample;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -28,4 +29,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> queryList(Map paramMap);
+
+    Integer queryCount(Map paramMap);
 }

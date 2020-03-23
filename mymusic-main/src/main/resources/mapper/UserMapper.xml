@@ -227,4 +227,24 @@
         createtime = #{createtime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="queryList" resultMap="BaseResultMap">
+        select * from t_user
+        <where>
+            <if test="queryText!=null">username like concat("%",#{queryText},"%")
+
+            </if>
+        </where>
+        order by createtime desc
+
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <select id="queryCount" resultType="int">
+        select count(*) from t_user
+        <where>
+            <if test="queryText!=null">username like concat("%",#{queryText},"%")</if>
+        </where>
+    </select>
 </mapper>

@@ -89,7 +89,7 @@ public class ManagerListController {
     //显示管理员信息
     @ResponseBody
     @RequestMapping("/managerList")
-    public Object userList(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
+    public Object managerList(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
                            @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize,
                            String queryText) {
         AjaxResult result = new AjaxResult();

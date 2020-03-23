@@ -122,12 +122,8 @@
                                 class="glyphicon glyphicon-search"></i> 查询
                         </button>
                     </form>
-                    <button id="deleteBatchBtn" type="button" class="btn btn-danger"
-                            style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i>删除
-                    </button>
-                    <button type="button" class="btn btn-primary" style="float:right;"
-                            onclick="window.location.href='toAdd'"><i class="glyphicon glyphicon-plus"></i>新增
-                    </button>
+
+
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
@@ -136,11 +132,11 @@
                             <tr>
                                 <th width="30">#</th>
                                 <th width="30"><input id="allCheckbox" type="checkbox"></th>
-                                <th>账号</th>
-                                <th>姓名</th>
+                                <th>用户名</th>
+                                <th>性别</th>
                                 <th>邮箱地址</th>
-                                <th>电话</th>
-                                <th width="100">操作</th>
+
+
                             </tr>
                             </thead>
                             <tbody>
@@ -207,7 +203,7 @@
             .ajax({
                 type: "POST",
                 data: jsonObj,
-                url: "managerList",
+                url: "userList",
                 beforeSend: function () {
                     loadingIndex = layer.load(2, {
                         time: 10 * 1000
@@ -232,19 +228,10 @@
                                 + n.username
                                 + '</td>';
                             content += '  <td>'
-                                + n.realname
+                                + n.sex
                                 + '</td>';
                             content += '  <td>'
                                 + n.email + '</td>';
-                            content += '  <td>'
-                                + n.phone + '</td>';
-                            content += '  <td>';
-                            content += '	  <button type="button" onclick="deleteManager('
-                                + n.id
-                                + ',\''
-                                + n.username
-                                + '\')" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i>删除</button>';
-                            content += '  </td>';
                             content += '</tr>';
 
                         });
@@ -304,50 +291,6 @@
 
     });
 
-    function deleteManager(id, username) {
-
-        layer.confirm(
-            "确认要删除[" + username + "]管理员吗？",
-            {
-                icon: 3,
-                title: '提示'
-            },
-            function (cindex) {
-                layer.close(cindex);
-                $.ajax({
-                    type: "POST",
-                    data: {
-                        "id": id
-                    },
-                    url: "doDelete",
-                    beforeSend: function () {
-
-                    },
-                    success: function (result) {
-                        if (result.success) {
-                            window.location.href = "toManagerList";
-                        } else {
-                            layer.msg(result.message, {
-                                time: 1000,
-                                icon: 5,
-                                shift: 6
-                            });
-                        }
-                    },
-                    error: function () {
-                        layer.msg("删除管理员失败！", {
-                            time: 1000,
-                            icon: 5,
-                            shift: 6
-                        });
-                    },
-
-                });
-            }, function (cindex) {
-                layer.close(cindex);
-            });
-
-    }
 
 
     $("#allCheckbox").click(function () {
@@ -356,77 +299,7 @@
         $("tbody tr td input[type='checkbox']").prop("checked", checkedStatus);
     });
 
-    $("#deleteBatchBtn").click(function () {
-        var selectCheckbox = $("tbody tr td input:checked");
 
-        if (selectCheckbox.length == 0) {
-            layer.confirm(
-                "请选择要删除的管理员",
-                {
-                    icon: 3,
-                    title: '提示'
-                });
-            return false;
-        }
-
-
-        /* var idStr="";
-
-        $.each(selectCheckbox,function(i,n){
-            if(i!=0){
-                idStr+="&";
-                }
-            idStr+="id="+n.id;
-        });  */
-
-        var jsonObj = {};
-        $.each(selectCheckbox, function (i, n) {
-            jsonObj["datas[" + i + "].id"] = n.id;
-            jsonObj["datas[" + i + "].username"] = n.name;
-
-
-        });
-
-        layer.confirm(
-            "确认要删除管理员吗？",
-            {
-                icon: 3,
-                title: '提示'
-            },
-            function (cindex) {
-                layer.close(cindex);
-                $.ajax({
-                    type: "POST",
-                    data: jsonObj,
-                    url: "doDeleteBatch",
-                    beforeSend: function () {
-
-                    },
-                    success: function (result) {
-                        if (result.success) {
-                            window.location.href = "toManagerList";
-                        } else {
-                            layer.msg(result.message, {
-                                time: 1000,
-                                icon: 5,
-                                shift: 6
-                            });
-                        }
-                    },
-                    error: function () {
-                        layer.msg("删除管理员失败！", {
-                            time: 1000,
-                            icon: 5,
-                            shift: 6
-                        });
-                    },
-
-                });
-            }, function (cindex) {
-                layer.close(cindex);
-            });
-
-    });
 </script>
 </body>
 </html>
