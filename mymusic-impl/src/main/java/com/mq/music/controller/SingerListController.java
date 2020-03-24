@@ -2,10 +2,7 @@ package com.mq.music.controller;
 
 import com.mq.music.bean.Singer;
 import com.mq.music.service.SingerService;
-import com.mq.music.util.AjaxResult;
-import com.mq.music.util.Page;
-import com.mq.music.util.StringUtil;
-import com.mq.music.util.changeEnglish;
+import com.mq.music.util.*;
 import com.mq.music.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +41,7 @@ public class SingerListController {
 
 
 
-    public final static String UPLOAD_PATH_PREFIX="/static/SingerPicture/";
+    public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/covers/";
     @RequestMapping("/doAddSinger")
     public Object doAddSinger(@RequestParam("uploadFile") MultipartFile uploadFile, Singer singer, HttpServletRequest request) {
         AjaxResult result = new AjaxResult();
@@ -61,13 +58,14 @@ public class SingerListController {
             }
 //            String pictureUrl=singer.getPicture();
 //            String[] url=pictureUrl.split("\\\\");
-            String pictureName= changeEnglish.change(singer.getPicture());
+            String Name= changeEnglish.change(singer.getPicture());
+            String newUrlName= uuidSplit.createUUID(6)+Name;
 
-            File newFile = new File(file.getAbsolutePath() + File.separator + pictureName);
+            File newFile = new File(file.getAbsolutePath() + File.separator + newUrlName);
             //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
             uploadFile.transferTo(newFile);
-            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/SingerPicture/" + pictureName;
-            singer.setPicture(pictureName);
+            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/covers/" + newUrlName;
+            singer.setPicture(newUrlName);
 
             int count = singerService.saveSinger(singer);
             if (count!=1){

@@ -32,7 +32,7 @@ public class SongListController {
         return "song/addMusic";
     }
 
-    public final static String UPLOAD_PATH_PREFIX="/static/Song/";
+    public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/";
     @RequestMapping("/doAddMusic")
         public Object doAddMusic(@RequestParam("uploadFile") MultipartFile uploadFile, Song song, HttpServletRequest request) {
         AjaxResult result = new AjaxResult();
@@ -55,7 +55,7 @@ public class SongListController {
             File newFile = new File(file.getAbsolutePath() + File.separator + newUrlName);
             //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
             uploadFile.transferTo(newFile);
-            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/Song/" + newUrlName;
+            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/" + newUrlName;
             song.setUrl(newUrlName);
 
             int count = songService.saveMusic(song);

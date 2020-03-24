@@ -1,6 +1,6 @@
 package com.mq.music.service.impl;
 
-import com.mq.music.bean.Manager;
+import com.mq.music.Exception.LoginFailException;
 import com.mq.music.bean.User;
 import com.mq.music.mapper.UserMapper;
 import com.mq.music.service.UserService;
@@ -35,5 +35,15 @@ public class UserServiceImpl implements UserService {
         page.setTotalsize(totalsize);
 
         return page;
+    }
+
+    @Override
+    public User queryUserLogin(Map<String, Object> paramMap) {
+        User user=userMapper.queryUserLogin(paramMap);
+        if (user == null) {
+            throw new LoginFailException("用户名或密码错误");
+
+        }
+        return user;
     }
 }

@@ -1,0 +1,192 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" taglib>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery支持PC手机音乐播放器插件</title>
+    <link rel="stylesheet" th:href="@{song_js/css/style.css}" />
+    <link rel="stylesheet" th:href="@{song_js/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+<div id="example-wrapper">
+    <!--<ul id="example-size-picker">
+<span>sadasdnasidjh</span>
+</ul>-->
+    <div id="example-outer">
+        <div id="example" data-size="full">
+
+        </div>
+    </div>
+</div>
+<div style="width: 100%; height: auto;background-color: #efefef;padding-top: 70px;">
+    <div style="width: 80%; height: auto;margin-left: 10%;background-color: #FFF">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+
+                    <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>评论</h2>
+                    <hr />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" style="font-family: '宋体';font-size: 15px;">评论内容：</label>
+                        <textarea class="form-control" rows="10" placeholder="请发表您的想法..."></textarea>
+                    </div>
+                    <button type="button" class="btn btn-success" style="width: 100px;font-size: 15px;">发表</button>
+                </div>
+                <div class="col-md-3 col-md-12 col-sm-12 col-xs-12">
+                    <h3>评论指南</h3> 请使用精简的语言发表您的评论
+                </div>
+            </div>
+            <div style="height: 100%;margin-top: 100px;">
+                <div class="media" style="height: 100px;">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        &nbsp;&nbsp;&nbsp;
+                        <h4 class="media-heading">作词很好</h4>
+
+                    </div>
+                </div>
+                <div class="media" style="height: 100px;">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        &nbsp;&nbsp;&nbsp;
+                        <h4 class="media-heading">作词很好</h4>
+
+                    </div>
+                </div>
+                <div class="media" style="height: 100px;">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        &nbsp;&nbsp;&nbsp;
+                        <h4 class="media-heading">作词很好</h4>
+
+                    </div>
+                </div>
+                <div class="media" style="height: 100px;">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        &nbsp;&nbsp;&nbsp;
+                        <h4 class="media-heading">作词很好</h4>
+
+                    </div>
+                </div>
+                <div class="media" style="height: 100px;">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        &nbsp;&nbsp;&nbsp;
+                        <h4 class="media-heading">作词很好</h4>
+
+                    </div>
+                </div>
+                <tfoot >
+                <tr>
+                    <td colspan="6" align="center">
+                        <ul class="pagination" style="margin-left: 33%;">
+                            <li class="disabled" >
+                                <a href="#">上一页 </a>
+                            </li>
+                            <li class="active">
+                                <a href="#">1 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#">下一页</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                </tfoot>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script th:src="@{song_js/images/jquery.min.js}"></script>
+<script th:src="@{song_js/js/ttw-clarity-player.js}"></script>
+<script th:src="@{song_js/js/yepnope.js}"></script>
+<script type="text/javascript">
+    var obj = [{
+        mp3: 'song_js/playlist/yangcong.mp3',
+        duration: '2:21',
+        cover: 'song_js/playlist/covers/yangcong.jpg',
+        title: '洋葱',
+        artist: '平安',
+        background: 'song_js/playlist/covers/bg.jpg'
+    },
+        {
+            mp3: 'song_js/playlist/Sugar.mp3',
+            duration: '3:55',
+            cover: 'song_js/playlist/covers/Maroon5.jpg',
+            title: 'Maroon 5 - Sugar',
+            artist: 'Maroon 5',
+            background: 'song_js/playlist/covers/bg.jpg'
+        },
+        {
+            mp3: 'song_js/playlist/yangcong.mp3',
+            duration: '3:49',
+            cover: 'song_js/playlist/covers/jay.jpg',
+            title: '你听得到 - 无与伦比演唱会',
+            artist: '周杰伦',
+            background: 'song_js/playlist/covers/bg.jpg'
+        }
+    ]
+    $(function() {
+        var myPlaylist = [
+            obj[0], obj[1], obj[2]
+        ];
+
+        var clarity = $('#example').ttwClarityPlayer(myPlaylist, {
+            jPlayer: {
+                supplied: 'mp3',
+                errorAlerts: true,
+                autoPlay: true,
+                warningAlerts: true,
+                consoleAlerts: true
+            }
+        });
+
+        $('#example-size-picker').on('click', 'li', function() {
+            $('#example').attr('data-size', $(this).data('size'));
+            clarity.manageLayout();
+        });
+    });
+</script>
+
+</body>
+
+</html>

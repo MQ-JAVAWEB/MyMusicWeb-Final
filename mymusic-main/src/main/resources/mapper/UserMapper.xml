@@ -247,4 +247,9 @@
             <if test="queryText!=null">username like concat("%",#{queryText},"%")</if>
         </where>
     </select>
+
+    <select id="queryUserLogin" parameterType="map" resultMap="BaseResultMap">
+        select * from t_user where username=#{username}
+        and password =#{password}
+    </select>
 </mapper>

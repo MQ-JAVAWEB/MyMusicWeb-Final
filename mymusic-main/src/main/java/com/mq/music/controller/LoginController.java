@@ -1,7 +1,9 @@
 package com.mq.music.controller;
 
 import com.mq.music.bean.Manager;
+import com.mq.music.bean.User;
 import com.mq.music.service.ManagerService;
+import com.mq.music.service.UserService;
 import com.mq.music.util.AjaxResult;
 import com.mq.music.util.Const;
 import com.mq.music.util.MD5Util;
@@ -18,6 +20,9 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private ManagerService managerService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/")
     public String login() {
@@ -37,10 +42,16 @@ public class LoginController {
             paramMap.put("password", MD5Util.digest(password));
             paramMap.put("type", type);
 
-            Manager manager = managerService.queryManagerLogin(paramMap);
+            if("user".equals(type)){
+                Manager manager = managerService.queryManagerLogin(paramMap);
+                session.setAttribute(Const.LOGIN_MANAGER, manager);
+            }
+            else {
+                User user=userService.queryUserLogin(paramMap);
+                session.setAttribute(Const.LOGIN_USER,user);
 
-            session.setAttribute(Const.LOGIN_MANAGER, manager);
-
+            }
+            result.setData(type);
             result.setSuccess(true);
         } catch (Exception e) {
             result.setMessage("登录失败！");
@@ -54,6 +65,11 @@ public class LoginController {
     @RequestMapping("/main")
     public String main() {
         return "backstage/main";
+    }
+
+    @RequestMapping("/member")
+    public String member(){
+        return "index/main";
     }
 
     // @RequestMapping("/toManagerList")
