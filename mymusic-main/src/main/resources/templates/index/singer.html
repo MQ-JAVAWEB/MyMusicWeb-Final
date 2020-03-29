@@ -27,9 +27,9 @@
             <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
                 <i class="icon-list"></i>
             </a>
-            <a href="index.html" class="navbar-brand text-lt">
+            <a th:href="@{member}" class="navbar-brand text-lt">
                 <i class="icon-earphones"></i>
-                <img src="images/logo.png" alt="." class="hide">
+                <img th:src="@{images/logo.png}" alt="." class="hide">
                 <span class="hidden-nav-xs m-l-sm">Musik</span>
             </a>
             <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
@@ -85,27 +85,19 @@
                     <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
 								<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="images/a0.png" alt="...">
-              </span> John.Smith <b class="caret"></b>
+              </span><span th:text="${session.User.username}"></span> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
                         <li>
                             <span class="arrow top"></span>
-                            <a href="#">Settings</a>
+                            <a href="#">个人信息</a>
                         </li>
                         <li>
-                            <a href="profile.html">Profile</a>
+                            <a href="profile.html">修改密码</a>
                         </li>
+                        <hr>
                         <li>
-                            <a href="#">
-                                <span class="badge bg-danger pull-right">3</span> Notifications
-                            </a>
-                        </li>
-                        <li>
-                            <a href="docs.html">Help</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="modal.lockme.html" data-toggle="ajaxModal">Logout</a>
+                            <a href="modal.lockme.html" data-toggle="ajaxModal">注销</a>
                         </li>
                     </ul>
                 </li>
@@ -127,33 +119,32 @@
                                         推荐
                                     </li>
                                     <li>
-                                        <a href="index.html">
+                                        <a th:href="@{member}">
                                             <i class="icon-disc icon text-success"></i>
                                             <span class="font-bold">发现音乐</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="genres.html">
+                                        <a th:href="@{toMusic}">
                                             <i class="icon-music-tone-alt icon text-info"></i>
                                             <span class="font-bold">音乐</span>
                                         </a>
                                     </li>
 
                                     <li>
-                                        <a href="grid.html" data-target="#content" data-el="#bjax-el" data-replace="true">
+                                        <a th:href="@{toSinger}" data-target="#content" data-el="#bjax-el" data-replace="true">
                                             <i class="icon-social-youtube icon  text-primary"></i>
                                             <span class="font-bold">歌手</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="events.html">
+                                        <a th:href="@{toTuiJian}">
                                             <i class="icon-drawer icon text-primary-lter"></i>
-
                                             <span class="font-bold">推荐</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="listen.html">
+                                        <a th:href="@{toBoFang}">
                                             <i class="icon-list icon  text-info-dker"></i>
                                             <span class="font-bold">播放</span>
                                         </a>

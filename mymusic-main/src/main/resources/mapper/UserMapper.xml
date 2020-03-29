@@ -103,10 +103,10 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.mq.music.bean.User">
-        insert into t_user (id, username, password,
+        insert into t_user ( username, password,
         sex, email, createtime
         )
-        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        values ( #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
         #{sex,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
         )
     </insert>

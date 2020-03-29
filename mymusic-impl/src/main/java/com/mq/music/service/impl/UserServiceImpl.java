@@ -4,10 +4,13 @@ import com.mq.music.Exception.LoginFailException;
 import com.mq.music.bean.User;
 import com.mq.music.mapper.UserMapper;
 import com.mq.music.service.UserService;
+import com.mq.music.util.MD5Util;
 import com.mq.music.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -45,5 +48,15 @@ public class UserServiceImpl implements UserService {
 
         }
         return user;
+    }
+
+    @Override
+    public int saveUser(User user) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String createtime = sdf.format(date);
+        user.setCreatetime(createtime);
+        user.setPassword(MD5Util.digest(user.getPassword()));
+        return userMapper.insert(user);
     }
 }

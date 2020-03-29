@@ -6,27 +6,26 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>jQuery导航图片全屏滚动代码 - 站长素材</title>
 
-<!--默认样式-->
-<link rel="stylesheet" th:href="@{css/reset.css}">
+	<!--&lt;!&ndash;默认样式&ndash;&gt;-->
+	<link rel="stylesheet" th:href="@{banner/css/reset.css}">
 
-<!--响应式框架-->
-<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}">
+	<!--响应式框架-->
 
-<!--css3动画库-->
-<link rel="stylesheet" th:href="@{css/animate.css}">
 
-<!--banner大图基础样式-->
-<link rel="stylesheet" th:href="@{ss/slick.css}">
+	<!--css3动画库-->
+	<link rel="stylesheet" th:href="@{banner/css/animate.css}">
 
-<!--页面滚动基础样式-->
-<link rel="stylesheet" th:href="@{css/jquery.fullPage.css}" />
+	<!--banner大图基础样式-->
+	<link rel="stylesheet" th:href="@{banner/css/slick.css}">
 
-<!--导航样式-->
-<link rel="stylesheet" th:href="@{css/head.css}" />
+	<!--页面滚动基础样式-->
+	<link rel="stylesheet" th:href="@{banner/css/jquery.fullPage.css}" />
 
-<!--图片和滚屏样式-->
-<link rel="stylesheet" th:href="@{css/index.css}">
+	<!--导航样式-->
+	<link rel="stylesheet" th:href="@{banner/css/head.css}" />
 
+	<!--图片和滚屏样式-->
+	<link rel="stylesheet" th:href="@{banner/css/index.css}">
 </head>
 <body>
 <!-- 导航 -->
@@ -40,24 +39,24 @@
 		<div class="index_banner">
 			<div class="item">
 				<a href="">
-				<div class="items scaleBg" style="background-image: url(image/109951164833227660.jpg);"></div>
+				<div class="items scaleBg" th:style="'background:url(' + @{images/bg1.jpg} + ');'"></div>
 				</a>
 				
 			</div>
 			<div class="item">
-				<div class="items scaleBg" style="background-image: url(image/109951164832394061.jpg);"></div>
+				<div class="items scaleBg" th:style="'background:url(' + @{images/bg2.jpg} + ');'"></div>
 				
 			</div>
 			<div class="item">
-				<div class="items scaleBg" style="background-image: url(image/109951164832756866.jpg);"></div>
+				<div class="items scaleBg" th:style="'background:url(' + @{banner/images/bg3.jpg} + ');'"></div>
 				
 			</div>
 			<div class="item">
-				<div class="items scaleBg" style="background-image: url(image/109951164832270717.jpg);"></div>
+				<div class="items scaleBg" th:style="'background:url(' + @{banner/images/bg4.jpg} + ');'"></div>
 				
 			</div>
 			<div class="item">
-				<div class="items scaleBg" style="background-image: url(image/109951164832359713.jpg);"></div>
+				<div class="items scaleBg" th:style="'background:url(' + @{banner/images/bg5.jpg} + ');'"></div>
 				
 			</div>            
 		</div>
@@ -87,9 +86,9 @@
 </div>
 
 <script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/jquery.fullPage.min.js}"></script>
-<script th:src="@{js/index_slick.js}"></script>
-<script th:src="@{js/index.js}"></script>
+<script th:src="@{banner/js/jquery.fullPage.min.js}"></script>
+<script th:src="@{banner/js/index_slick.js}"></script>
+<script th:src="@{banner/js/index.js}"></script>
 
 </body>
 </html>

@@ -9,4 +9,6 @@ public interface UserService {
     Page queryPageUser(Map paramMap);
 
     User queryUserLogin(Map<String, Object> paramMap);
+
+    int saveUser(User user);
 }

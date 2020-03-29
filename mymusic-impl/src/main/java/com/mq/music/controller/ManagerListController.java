@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +27,36 @@ public class ManagerListController {
         return "manager/managerList";
     }
 
+    @RequestMapping("/toUpdatePwd")
+    public String toUpdatePwd(){
+        return "manager/updatePwd";
+    }
+
     @RequestMapping("/toAdd")
     public String toAdd() {
         return "manager/add";
+    }
+
+    @ResponseBody
+    @RequestMapping("/doUpdatePwd")
+    public Object doUpdatePwd(String password,
+                               String realname, HttpSession session)
+                               {
+        AjaxResult result = new AjaxResult();
+        try {
+            Map<String,Object> map=new HashMap<>();
+
+            int i= (int) managerService.modifyPassword( password, realname, session);
+
+
+                result.setSuccess(i==1);
+
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("修改密码失败");
+        }
+        return result;
     }
 
     //批量删除管理员

@@ -121,33 +121,7 @@ public class SingerListController {
 
 
 
-    //增加歌手
-    //@ResponseBody
-//    @RequestMapping("/doSingerAdd")
-//    public Object doSingerAdd(HttpServletRequest request, Singer singer, HttpSession session){
-//        AjaxResult result=new AjaxResult();
-//        try {
-//
-//            Map paramMap=new HashMap();
-//            paramMap.put("pageno", pageno);
-//            paramMap.put("pagesize", pagesize);
-//            //paramMap.put("queryText", queryText);
-//
-//            if(StringUtil.isNotEmpty(queryText)){
-//                paramMap.put("queryText", queryText);
-//            }
-//
-//            Page page=singerService.queryPage(paramMap);
-//
-//            result.setSuccess(true);
-//            result.setPage(page);
-//        } catch (Exception e) {
-//            result.setSuccess(false);
-//            e.printStackTrace();
-//            result.setMessage("查询数据失败");
-//        }
-//        return result;
-//    }
+
 
     //显示歌手信息列表
     @ResponseBody

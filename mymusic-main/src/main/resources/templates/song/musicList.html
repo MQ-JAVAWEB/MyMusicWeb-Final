@@ -44,7 +44,7 @@
                                 th:text="${session.Manager.getRealname()}"></label> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
+                            <li><a th:href="@{toUpdatePwd}"><i class="glyphicon glyphicon-cog"></i> 修改密码</a></li>
                             <li class="divider"></li>
                             <li><a th:href="@{logout}"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
                         </ul>
@@ -166,7 +166,7 @@
 <script th:src="@{backstage/jquery/jquery-2.1.1.min.js}"></script>
 <script th:src="@{backstage/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{backstage/script/docs.min.js}"></script>
-<script th:src="@{backstage/layer/layer.js}"></script>
+<script th:src="@{backstage/jquery/layer/layer.js}"></script>
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function () {

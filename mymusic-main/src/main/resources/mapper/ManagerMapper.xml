@@ -282,4 +282,18 @@
         createtime = #{createtime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="selectBypassword" resultMap="BaseResultMap" parameterType="java.lang.String" >
+                SELECT
+            *
+        FROM
+            t_manager
+        WHERE
+
+         realname = #{realname}
+    </select>
+
+
+
 </mapper>

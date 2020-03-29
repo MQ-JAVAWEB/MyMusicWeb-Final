@@ -11,8 +11,10 @@ import com.mq.music.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,4 +79,19 @@ public class ManagerServiceImpl implements ManagerService {
 
         return managerMapper.deleteManagerBatch(data);
     }
+
+    @Override
+    public Object modifyPassword(String password,String username, HttpSession session) {
+        Map<String,Object> map=new HashMap<String, Object>();
+        if(password!=null){
+            Manager manager=managerMapper.selectBypassword(username);
+            Integer id=manager.getId();
+            Manager m=new Manager();
+            m.setId(id);
+            m.setPassword(MD5Util.digest(password));
+            return managerMapper.updateByPrimaryKeySelective(m);
+            }
+        return 0;
+    }
+
 }

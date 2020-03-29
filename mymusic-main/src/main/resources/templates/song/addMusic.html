@@ -35,7 +35,7 @@
                                 th:text="${session.Manager.getRealname()}"></label> <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
+                            <li><a th:href="@{toUpdatePwd}"><i class="glyphicon glyphicon-cog"></i> 修改密码</a></li>
                             <li class="divider"></li>
                             <li><a th:href="@{logout}"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
                         </ul>
@@ -145,9 +145,8 @@
                             <label for="falbum">专辑</label>
                             <input type="text" class="form-control" name="album" id="falbum">
                         </div>
-                        <input id="addsongBtn" type="submit" class="btn btn-success" value="新增"><i
-                            class="glyphicon glyphicon-plus"></i>
-                        </input>
+                        <input id="addsongBtn" type="submit" class="btn btn-success" value="新增" />
+
                         <button id="resetSongBtn" type="button" class="btn btn-danger"><i
                                 class="glyphicon glyphicon-refresh"></i> 重置
                         </button>

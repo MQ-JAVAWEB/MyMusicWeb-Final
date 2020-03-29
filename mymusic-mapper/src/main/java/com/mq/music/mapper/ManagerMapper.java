@@ -38,4 +38,8 @@ public interface ManagerMapper {
     Integer queryCount(Map paramMap);
 
     int deleteManagerBatch(Data data);
+
+    int updatePwdByUserName(Map paramMap);
+
+    Manager selectBypassword( @RequestParam("realname") String realname);
 }

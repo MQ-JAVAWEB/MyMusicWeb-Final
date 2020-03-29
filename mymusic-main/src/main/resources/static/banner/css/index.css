@@ -32,7 +32,7 @@
 	-webkit-background-size:cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	height:75vh;
+	height:100vh;
 	position: relative;
 }
 .index_main .section1 .index_banner .item.slick-current .scaleBg{
@@ -279,7 +279,7 @@
 }
 @media only screen and (max-width: 992px){
 	.index_main .section1 .index_banner .item{
-		height: 100vh;
+		height:80vh;
 	}
 	.index_main .section1 .index_banner .item .inner .block_txt{
 		left: 0;

@@ -16,7 +16,7 @@
     <!--//style sheet end here-->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
 </head>
-<body th:style="'background:url(' + @{/images/bg2.jpg} + ');'" >
+<body th:style="'background:url(' + @{images/bg1.jpg} + ');'" >
 <div class="mid-class">
     <div class="art-right-w3ls">
         <h2>登录</h2>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-left-to-w3l ">
                     <select id="ftype" style="height: 42px">
-                        <option  value="member">会员</option>
+                        <option  value="member">普通用户</option>
                         <option  value="user">管理员</option>
                     </select>
                     <div class="clear"></div>
@@ -59,24 +59,24 @@
             <div class="popup">
                 <!--login form-->
                 <div class="letter-w3ls">
-                    <form action="#" method="post">
+                    <form method="post">
                         <div class="form-left-to-w3l">
-                            <input type="text"  name="username" placeholder="用户名" required="">
+                            <input type="text" id="username"  name="username" placeholder="用户名" required="">
                         </div>
                         <div class="form-left-to-w3l">
-                            <input type="password" name="password" placeholder="密码" required="">
+                            <input type="password" id="password" name="password" placeholder="密码" required="">
                         </div>
                         <div class="form-left-to-w3l">
-                            <input type="password" name="password" placeholder="确认密码" required="">
+                            <input type="password" id="repassword" name="password" placeholder="确认密码" required="">
                         </div>
                         <div class="form-left-to-w3l">
-                            <input type="text" name="sex" placeholder="性别" required="">
+                            <input type="text" id="sex" name="sex" placeholder="性别" required="">
                         </div>
                         <div class="form-left-to-w3l margin-zero">
-                            <input type="email" name="email" placeholder="邮箱" required="">
+                            <input type="email" id="email" name="email" placeholder="邮箱" required="">
                         </div>
                         <div class="btnn">
-                            <button type="submit">注册</button>
+                            <button type="button" id="regBtn">注册</button>
                             <br>
                         </div>
                     </form>
@@ -90,6 +90,50 @@
 <script th:src="@{js/jquery.min.js}"></script>
 <script th:src="@{backstage/jquery/layer/layer.js}"></script>
             <script>
+
+                $("#regBtn").click(function () {
+
+                    var username = $("#username");
+                    var password = $("#password");
+                    var repassword=$("#repassword");
+                    var sex = $("#sex");
+                    var email = $("#email")
+
+
+
+                    $.ajax({
+                        type: "POST",
+                        data: {
+                            "username": username.val(),
+                            "password" : password.val(),
+                            "repassword": repassword.val(),
+                            "sex": sex.val(),
+                            "email": email.val()
+                        },
+                        url: "doreg",
+                        beforeSend: function () {
+
+                            return true
+                        },
+                        success: function (result) {
+
+                            if (result.success) {
+
+                                window.location.href = "/";
+                                layer.msg("注册成功!", {time: 5000, icon: 5, shift: 6});
+                            } else {
+                                layer.msg(result.message, {time: 1000, icon: 5, shift: 6});
+                            }
+                        },
+                        error: function () {
+                            layer.msg("注册用户失败！", {time: 1000, icon: 5, shift: 6});
+                        },
+
+                    });
+
+                });
+
+
                 function dologin() {
 
                     var fusername = $("#fusername");
@@ -146,13 +190,13 @@
                                 }
 
                             } else {
-                                layer.msg("<a style='color:red;'>登陆失败！</a>", {time: 1000, icon: 2, shift: 6,});
+                                layer.msg("<a style='color:red;'>登陆失败或存在空格！</a>", {time: 1000, icon: 2, shift: 6,});
                             }
 
 
                         },
                         error: function () {
-                            layer.msg("<a style='color:red;'>登陆失败！</a>", {time: 1000, icon: 2, shift: 6});
+                            layer.msg("<a style='color:red;'>登陆失败或存在空格！</a>", {time: 1000, icon: 2, shift: 6});
                         }
                     });
                 }
