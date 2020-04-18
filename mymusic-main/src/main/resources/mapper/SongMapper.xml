@@ -261,18 +261,18 @@
 
 
     <select id="queryList" resultMap="BaseResultMap">
-        select * from t_song
-        <where>
-            <if test="queryText!=null">name like concat("%",#{queryText},"%")
-                or singer like concat("%",#{queryText},"%")
-                or songType like concat("%",#{queryText},"%")
-                or album like concat("%",#{queryText},"%")
-            </if>
-        </where>
-        order by createtime DESC
+    select * from t_song
+    <where>
+        <if test="queryText!=null">name like concat("%",#{queryText},"%")
+            or singer like concat("%",#{queryText},"%")
+            or songType like concat("%",#{queryText},"%")
+            or album like concat("%",#{queryText},"%")
+        </if>
+    </where>
+    order by createtime DESC
 
-        limit #{startIndex},#{pagesize}
-    </select>
+    limit #{startIndex},#{pagesize}
+</select>
 
     <select id="queryCount" resultType="int">
         select count(*) from t_song
@@ -285,6 +285,48 @@
         </where>
     </select>
 
+    <select id="queryHotMusicList" resultMap="BaseResultMap">
+        select * from t_song
+
+        order by clickNum DESC
+
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <select id="queryHotMusicCount" resultType="int">
+        select count(*) from t_song
+
+    </select>
+
+    <select id="queryNewMusicList" resultMap="BaseResultMap">
+        select * from t_song
+
+        order by createtime DESC
+
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <select id="queryNewMusicCount" resultType="int">
+        select count(*) from t_song
+
+    </select>
+
+
+    <select id="queryOriginalMusicList" resultMap="BaseResultMap">
+        select * from t_song
+        WHERE songType="原创"
+        order by clickNum DESC
+
+        limit #{startIndex},#{pagesize}
+    </select>
+
+    <select id="queryOriginalMusicCount" resultType="int">
+        select count(*) from t_song
+
+    </select>
+
+
+
     <delete id="deleteBachMusic">
 
         delete  from t_song
@@ -293,5 +335,7 @@
             #{song.id}
         </foreach>
     </delete>
+
+
 
 </mapper>

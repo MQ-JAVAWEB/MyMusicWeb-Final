@@ -35,4 +35,6 @@ public interface UserMapper {
     Integer queryCount(Map paramMap);
 
     User queryUserLogin(Map<String, Object> paramMap);
+
+    User selectByUsername(User user);
 }

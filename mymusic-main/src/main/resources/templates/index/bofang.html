@@ -19,7 +19,11 @@
     <link rel="stylesheet" th:href="@{song_js/css/styles.css}" />
     <link rel="stylesheet" th:href="@{css/bootstrap.css}" />
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
-
+    <style>
+        .hei {
+          height: 0px;
+        }
+    </style>
     <!--[if lt IE 9]>
     <script th:src="@{js/ie/html5shiv.js}"></script>
     <script th:src="@{js/ie/respond.min.js}"></script>
@@ -27,7 +31,7 @@
     <![endif]-->
 </head>
 
-<body class="">
+<body class="" onload="pageChange(1)">
 <section class="vbox">
     <header class="bg-black lter header header-md navbar navbar-fixed-top-xs">
         <div class="navbar-header aside bg-success nav-xs" style="background-color: #8ca1af;height: 60px">
@@ -55,10 +59,7 @@
         <div class="navbar-right ">
             <ul class="nav navbar-nav m-n hidden-xs nav-user user">
                 <li class="hidden-xs">
-                    <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
-                        <i class="icon-bell"></i>
-                        <span class="badge badge-sm up bg-danger count">2</span>
-                    </a>
+
                     <section class="dropdown-menu aside-xl animated fadeInUp">
                         <section class="panel bg-white">
                             <div class="panel-heading b-light bg-light">
@@ -92,19 +93,18 @@
                     <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
 								<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
                 <img src="images/a0.png" alt="...">
-              </span> <span th:text="${session.User.username}"></span> <b  class="caret"></b>
+              </span> <span id="userSpan" th:text="${session.User.username}"></span> <b  class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
                         <li>
-                            <span class="arrow top"></span>
-                            <a href="#">个人信息</a>
+                            <a th:href="@{toGeRenXinXi}">个人信息</a>
                         </li>
                         <li>
-                            <a href="profile.html">修改密码</a>
+                            <a th:href="@{toRegSinger}">注册歌手</a>
                         </li>
                         <hr>
                         <li>
-                            <a href="modal.lockme.html" data-toggle="ajaxModal">注销</a>
+                            <a th:href="@{logout}" >注销</a>
                         </li>
                     </ul>
                 </li>
@@ -150,12 +150,7 @@
                                             <span class="font-bold">推荐</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a th:href="@{toBoFang}">
-                                            <i class="icon-list icon  text-info-dker"></i>
-                                            <span class="font-bold">播放</span>
-                                        </a>
-                                    </li>
+
                                     <li class="m-b hidden-nav-xs"></li>
                                 </ul>
 
@@ -175,6 +170,12 @@
                             <!--<ul id="example-size-picker">
                         <span>sadasdnasidjh</span>
                         </ul>-->
+                            <input type="hidden" th:value="${song.name}" id="songName">
+                            <input type="hidden" th:value="${song.id}" id="songId">
+                            <input type="hidden" th:value="${song.album}" id="songAlbum">
+                            <input type="hidden" th:value="${song.singer}" id="songSinger">
+                            <input type="hidden" th:value="${singer.picture}" id="singerPicture">
+                            <input type="hidden" th:value="${song.url}" id="songUrl">
                             <div id="example-outer">
                                 <div id="example" data-size="full">
 
@@ -186,105 +187,32 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-
-                                            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>评论</h2>
-                                            <hr />
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1" style="font-family: '宋体';font-size: 15px;">评论内容：</label>
-                                                <textarea class="form-control" id="exampleInputEmail1" rows="10" placeholder="请发表您的想法..."></textarea>
-                                            </div>
-                                            <button type="button" class="btn btn-success" style="width: 100px;font-size: 15px;">发表</button>
+                                            <form id="addForm">
+                                                <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>评论</h2>
+                                                <hr />
+                                                <div class="form-group">
+                                                    <label for="fcontent" style="font-family: '宋体';font-size: 15px;">评论内容：
+                                                        <textarea class="form-control" style="resize:none" id="fcontent" cols="100" rows="10" name="content" placeholder="请发表您的想法..."></textarea>
+                                                    </label>
+                                                </div>
+                                                <button type="button" class="btn btn-success" id="subBtn" style="width: 100px;font-size: 15px;">发表</button>
+                                            </form>
                                         </div>
+
                                         <div class="col-md-3 col-md-12 col-sm-12 col-xs-12">
                                             <h3>评论指南</h3> 请使用精简的语言发表您的评论
                                         </div>
                                     </div>
                                     <div style="height: 100%;margin-top: 100px;">
-                                        <div class="media" style="height: 100px;">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                &nbsp;&nbsp;&nbsp;
-                                                <h4 class="media-heading">作词很好</h4>
+                                        <div class="media" style="margin-bottom: 12px;background-color: #efefec" id="comment-div">
 
-                                            </div>
                                         </div>
-                                        <div class="media" style="height: 100px;">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                &nbsp;&nbsp;&nbsp;
-                                                <h4 class="media-heading">作词很好</h4>
-
-                                            </div>
-                                        </div>
-                                        <div class="media" style="height: 100px;">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                &nbsp;&nbsp;&nbsp;
-                                                <h4 class="media-heading">作词很好</h4>
-
-                                            </div>
-                                        </div>
-                                        <div class="media" style="height: 100px;">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                &nbsp;&nbsp;&nbsp;
-                                                <h4 class="media-heading">作词很好</h4>
-
-                                            </div>
-                                        </div>
-                                        <div class="media" style="height: 100px;">
-                                            <div class="media-left">
-                                                <a href="#">
-                                                    <img class="media-object" style="width: 45px;" src="http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20200105/c5162a9d6f484ce3b8ff464b27f8865f.jpeg">
-                                                </a>
-                                            </div>
-                                            <div class="media-body">
-                                                &nbsp;&nbsp;&nbsp;
-                                                <h4 class="media-heading">作词很好</h4>
-
-                                            </div>
-                                        </div>
+                                        <div style="width:100%; border:1px solid #8ca1af;"></div>
                                         <tfoot >
                                         <tr>
                                             <td colspan="6" align="center">
                                                 <ul class="pagination" style="margin-left: 33%;">
-                                                    <li class="disabled" >
-                                                        <a href="#">上一页 </a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#">1 <span class="sr-only">(current)</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">3</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">4</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">5</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">下一页</a>
-                                                    </li>
+
                                                 </ul>
                                             </td>
                                         </tr>
@@ -317,35 +245,32 @@
 <script th:src="@{song_js/images/jquery.min.js}"></script>
 <script th:src="@{song_js/js/ttw-clarity-player.js}"></script>
 <script th:src="@{song_js/js/yepnope.js}"></script>
+<script th:src="@{backstage/jquery/layer/layer.js}"></script>
 <script type="text/javascript">
+    // <input type="hidden" th:value="${song.name}" id="songName">
+    //     <input type="hidden" th:value="${song.album}" id="songAlbum">
+    //     <input type="hidden" th:value="${song.singer}" id="songSinger">
+    //     <input type="hidden" th:value="${singer.picture}" id="singerPicture">
+    //     <input type="hidden" th:value="${song.url}" id="songUrl">
+    var userSpan = $("#userSpan").text();
+    var songName=$("#songName").val();
+    var songId=$("#songId").val();
+    var songSinger=$("#songSinger").val();
+    var singerPicture=$("#singerPicture").val();
+    var songUrl=$("#songUrl").val();
+    var mp3Url='song_js/playlist/'+songUrl;
+    var picUrl='song_js/playlist/covers/'+singerPicture;
+
     var obj = [{
-        mp3: 'song_js/playlist/yangcong.mp3',
-        duration: '2:21',
-        cover: 'song_js/playlist/covers/yangcong.jpg',
-        title: '洋葱',
-        artist: '平安',
-        background: 'song_js/playlist/covers/bg.jpg'
-    },
-        {
-            mp3: 'song_js/playlist/Sugar.mp3',
-            duration: '3:55',
-            cover: 'song_js/playlist/covers/Maroon5.jpg',
-            title: 'Maroon 5 - Sugar',
-            artist: 'Maroon 5',
-            background: 'song_js/playlist/covers/bg.jpg'
-        },
-        {
-            mp3: 'song_js/playlist/yangcong.mp3',
-            duration: '3:49',
-            cover: 'song_js/playlist/covers/jay.jpg',
-            title: '你听得到 - 无与伦比演唱会',
-            artist: '周杰伦',
-            background: 'song_js/playlist/covers/bg.jpg'
-        }
+        mp3: mp3Url,
+        cover: picUrl,
+        title: songName,
+        artist: songSinger,
+    }
     ]
     $(function() {
         var myPlaylist = [
-            obj[0], obj[1], obj[2]
+            obj[0]
         ];
 
         var clarity = $('#example').ttwClarityPlayer(myPlaylist, {
@@ -362,6 +287,137 @@
             $('#example').attr('data-size', $(this).data('size'));
             clarity.manageLayout();
         });
+    });
+    // var album_cover=document.getElementsByClassName("album-cover");
+    // console.log(album_cover);
+    // album_cover[0].onload= function () {
+    //     album_cover[0].className="album-cover hei";
+    // }
+
+    function pageChange(pageno) {
+        //window.location.href="${APP_PATH}/user/userList.do?pageno="+pageno
+        queryPageUser(pageno);
+    }
+
+    var jsonObj = {
+        "pageno": 1,
+        "pagesize": 10,
+        "id" : songId
+    }
+
+    var loadingIndex = -1;
+
+    function queryPageUser(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type: "POST",
+                data: jsonObj,
+                url: "commentBySongName",
+                beforeSend: function () {
+                    loadingIndex = layer.load(2, {
+                        time: 10 * 1000
+                    });
+                    return true;
+                },
+                success: function (result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data, function (i, n) {
+
+                            content += '<div class="media-left" style="margin-bottom: 100px;padding-left: 100px;"><br>';
+
+                            content += '  <h2>'
+                                + n.username
+                                + '：</h2>';
+                            content += '<h4 class=" col-md-9 col-md-offset-2">'
+                                + n.content
+                                + '</h4>';
+                            content += '  </div>';
+
+                        });
+
+                        $("#comment-div").html(content);
+
+                        var contentBar = '';
+
+                        if (page.pageno == 1) {
+                            contentBar += '<li class="disabled"><a href="#">上一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno - 1) + ')">上一页</a></li>';
+                        }
+
+                        for (var i = 1; i <= page.totalno; i++) {
+                            contentBar += '<li ';
+                            if (page.pageno == i) {
+                                contentBar += 'class="active"';
+                            }
+                            contentBar += '><a href="#" onclick="pageChange('
+                                + i + ')">' + i + '</a></li>';
+                        }
+
+                        if (page.pageno == page.totalno) {
+                            contentBar += '<li class="disabled"><a href="#" >下一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno + 1) + ')">下一页</a></li>';
+                        }
+
+                        $(".pagination").html(contentBar);
+
+                    } else {
+                        layer.msg(result.msg, {
+                            time: 1000,
+                            icon: 5,
+                            shift: 6
+                        });
+                    }
+                },
+                error: function () {
+                    layer.msg("加载失败", {
+                        time: 1000,
+                        icon: 5,
+                        shift: 6
+                    });
+                }
+
+            });
+    }
+
+    $("#subBtn").click(function () {
+
+        var fcontent = $("#fcontent")
+
+        $.ajax({
+            type: "POST",
+            data: {
+                "username": userSpan,
+                "content": fcontent.val(),
+                "songId": songId,
+
+            },
+            url: "doAddContent",
+            beforeSend: function () {
+                return true;
+            },
+            success: function (result) {
+                if (result.success) {
+                    pageChange(1)
+                    fcontent.val("");
+                }
+            },
+            error: function () {
+                layer.msg("保存失败！", {time: 1000, icon: 5, shift: 6});
+            },
+
+        });
+
     });
 </script>
 

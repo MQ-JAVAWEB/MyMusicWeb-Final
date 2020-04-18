@@ -1,5 +1,6 @@
 package com.mq.music.service;
 
+import com.mq.music.bean.Comment;
 import com.mq.music.util.Page;
 import com.mq.music.vo.Data;
 
@@ -11,4 +12,6 @@ public interface CommentService {
     int deleteComment(Integer id);
 
     int deleteBachComment(Data data);
+
+    int saveComment(Comment comment);
 }

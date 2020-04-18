@@ -48,10 +48,7 @@
         <div class="navbar-right ">
             <ul class="nav navbar-nav m-n hidden-xs nav-user user">
                 <li class="hidden-xs">
-                    <a href="#" class="dropdown-toggle lt" data-toggle="dropdown">
-                        <i class="icon-bell"></i>
-                        <span class="badge badge-sm up bg-danger count">2</span>
-                    </a>
+
                     <section class="dropdown-menu aside-xl animated fadeInUp">
                         <section class="panel bg-white">
                             <div class="panel-heading b-light bg-light">
@@ -89,15 +86,14 @@
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
                         <li>
-                            <span class="arrow top"></span>
-                            <a href="#">个人信息</a>
+                            <a th:href="@{toGeRenXinXi}">个人信息</a>
                         </li>
                         <li>
-                            <a href="profile.html">修改密码</a>
+                            <a th:href="@{toRegSinger}">注册歌手</a>
                         </li>
                         <hr>
                         <li>
-                            <a href="modal.lockme.html" data-toggle="ajaxModal">注销</a>
+                            <a th:href="@{logout}" >注销</a>
                         </li>
                     </ul>
                 </li>
@@ -143,12 +139,7 @@
                                             <span class="font-bold">推荐</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a th:href="@{toBoFang}">
-                                            <i class="icon-list icon  text-info-dker"></i>
-                                            <span class="font-bold">播放</span>
-                                        </a>
-                                    </li>
+
                                     <li class="m-b hidden-nav-xs"></li>
                                 </ul>
 

@@ -37,4 +37,6 @@ public interface SingerMapper {
     Integer queryCount(Map paramMap);
 
     int deleteBachSinger(Data data);
+
+    Singer getSingerPictureByName(String singerName);
 }

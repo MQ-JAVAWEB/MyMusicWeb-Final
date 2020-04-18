@@ -36,4 +36,18 @@ public interface SongMapper {
     Integer queryCount(Map paramMap);
 
     int deleteBachMusic(Data data);
+
+    List<Song> queryHotMusicList(Map paramMap);
+
+    Integer queryHotMusicCount(Map paramMap);
+
+    List<Song> queryNewMusicList(Map paramMap);
+
+    Integer queryNewMusicCount(Map paramMap);
+
+    List<Song> queryOriginalMusicList(Map paramMap);
+
+    Integer queryOriginalMusicCount(Map paramMap);
+
+
 }

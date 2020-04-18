@@ -72,9 +72,44 @@ public class SingerListController {
                 return "singer/addSinger";
             }
         } catch (Exception e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return "redirect:/toSingerList";
+    }
+
+    @RequestMapping("/doAddUserSinger")
+    public Object doAddUserSinger(@RequestParam("uploadFile") MultipartFile uploadFile, Singer singer, HttpServletRequest request) {
+        AjaxResult result = new AjaxResult();
+        singer.setPicture(uploadFile.getOriginalFilename());
+        try {
+            if (uploadFile.isEmpty()){
+                result.setMessage("请选择上传文件！");
+                return result;
+            }
+            String realPath = new String("mymusic-main/src/main/resources/" + UPLOAD_PATH_PREFIX);
+            File file = new File(realPath);
+            if (!file.isDirectory()){
+                file.mkdirs();
+            }
+//            String pictureUrl=singer.getPicture();
+//            String[] url=pictureUrl.split("\\\\");
+            String Name= changeEnglish.change(singer.getPicture());
+            String newUrlName= uuidSplit.createUUID(6)+Name;
+
+            File newFile = new File(file.getAbsolutePath() + File.separator + newUrlName);
+            //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
+            uploadFile.transferTo(newFile);
+            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/covers/" + newUrlName;
+            singer.setPicture(newUrlName);
+
+            int count = singerService.saveSinger(singer);
+            if (count!=1){
+                return "singer/addSinger";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/member";
     }
 
 

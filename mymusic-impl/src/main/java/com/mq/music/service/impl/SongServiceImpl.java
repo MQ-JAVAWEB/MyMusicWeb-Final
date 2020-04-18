@@ -56,4 +56,64 @@ public class SongServiceImpl implements SongService {
         song.setClicknum(0);
         return songMapper.insert(song);
     }
+
+    @Override
+    public Page queryPage(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+
+        List<Song> datas = songMapper.queryHotMusicList(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = songMapper.queryHotMusicCount(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
+
+    @Override
+    public Page queryPageNewMusic(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+
+        List<Song> datas = songMapper.queryNewMusicList(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = songMapper.queryNewMusicCount(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
+
+    @Override
+    public Page queryPageOriginalMusic(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+
+        List<Song> datas = songMapper.queryOriginalMusicList(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = songMapper.queryOriginalMusicCount(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
+
+    @Override
+    public Song getSongById(Integer id) {
+        return songMapper.selectByPrimaryKey(id);
+    }
+
 }

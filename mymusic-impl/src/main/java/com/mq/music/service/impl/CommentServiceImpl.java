@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
         Integer startIndex = page.getStartIndex();
         paramMap.put("startIndex", startIndex);
 
-        List<Comment> datas = commentMapper.queryList(paramMap);
+        List<Comment> datas = commentMapper.queryListContent(paramMap);
 
         page.setDatas(datas);
 
@@ -43,5 +43,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int deleteBachComment(Data data) {
         return commentMapper.deleteBachComment(data);
+    }
+
+    @Override
+    public int saveComment(Comment comment) {
+        return commentMapper.insert(comment);
     }
 }

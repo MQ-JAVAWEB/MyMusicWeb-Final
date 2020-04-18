@@ -18,6 +18,25 @@ public class Data {
     private List<Comment>  commentList= new ArrayList<Comment>();
     private List<Comment> datasComment = new ArrayList<Comment>();
 
+    private List<Tuijian>  tuijianList= new ArrayList<Tuijian>();
+    private List<Tuijian> datasTuiJian = new ArrayList<Tuijian>();
+
+    public List<Tuijian> getTuijianList() {
+        return tuijianList;
+    }
+
+    public void setTuijianList(List<Tuijian> tuijianList) {
+        this.tuijianList = tuijianList;
+    }
+
+    public List<Tuijian> getDatasTuiJian() {
+        return datasTuiJian;
+    }
+
+    public void setDatasTuiJian(List<Tuijian> datasTuiJian) {
+        this.datasTuiJian = datasTuiJian;
+    }
+
     private List<Song>  MusicList= new ArrayList<Song>();
     private List<Song> datasMusic = new ArrayList<Song>();
 

@@ -9,8 +9,10 @@ import com.mq.music.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +60,34 @@ public class UserServiceImpl implements UserService {
         user.setCreatetime(createtime);
         user.setPassword(MD5Util.digest(user.getPassword()));
         return userMapper.insert(user);
+    }
+
+    @Override
+    public Object modifyMessage(User user, HttpSession session) {
+        Map<String,Object> map=new HashMap<String, Object>();
+        if(user!=null){
+            user=userMapper.selectByUsername(user);
+            Integer id=user.getId();
+
+            user.setId(id);
+            user.setPassword(MD5Util.digest(user.getPassword()));
+            return userMapper.updateByPrimaryKeySelective(user);
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateUser(User user) {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date=new Date();
+        String createtime=sdf.format(date);
+        user.setCreatetime(createtime);
+        user.setPassword(MD5Util.digest(user.getPassword()));
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public User getUserById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }

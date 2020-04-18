@@ -14,4 +14,14 @@ public interface SongService {
     int deleteBachMusic(Data data);
 
     int saveMusic(Song song);
+
+    Page queryPage(Map paramMap);
+
+    Page queryPageNewMusic(Map paramMap);
+
+    Page queryPageOriginalMusic(Map paramMap);
+
+    Song getSongById(Integer id);
+
+
 }

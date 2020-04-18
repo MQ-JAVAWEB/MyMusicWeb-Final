@@ -90,7 +90,7 @@ public class ManagerServiceImpl implements ManagerService {
             m.setId(id);
             m.setPassword(MD5Util.digest(password));
             return managerMapper.updateByPrimaryKeySelective(m);
-            }
+        }
         return 0;
     }
 

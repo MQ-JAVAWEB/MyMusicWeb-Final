@@ -257,4 +257,12 @@
             #{singer.id}
         </foreach>
     </delete>
+
+
+    <select id="getSingerPictureByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_singer
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
 </mapper>

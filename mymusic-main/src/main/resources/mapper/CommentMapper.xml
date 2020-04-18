@@ -101,9 +101,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.mq.music.bean.Comment">
-        insert into t_comment (id, song_id, username,
+        insert into t_comment ( song_id, username,
         content)
-        values (#{id,jdbcType=INTEGER}, #{songId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+        values (#{songId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
         #{content,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.mq.music.bean.Comment">
@@ -197,14 +197,12 @@
     </update>
 
 
-    <select id="queryList" resultMap="BaseResultMap">
+    <select id="queryListContent" resultMap="BaseResultMap">
         select * from t_comment
 
-        <where>
-            <if test="queryText!=null">content like concat("%",#{queryText},"%")
-            or  username like concat("%",#{queryText},"%")
-            </if>
-        </where>
+        where song_id = #{songId}
+
+        order by id desc
 
         limit #{startIndex},#{pagesize}
     </select>
@@ -216,6 +214,18 @@
         </where>
     </select>
 
+    <select id="queryList" resultMap="BaseResultMap">
+        select * from t_user
+        <where>
+            <if test="queryText!=null">username like concat("%",#{queryText},"%")
+            or content like concat("%",#{queryText},"%")
+            </if>
+        </where>
+        order by id
+
+        limit #{startIndex},#{pagesize}
+
+    </select>
 
     <delete id="deleteBachComment">
 

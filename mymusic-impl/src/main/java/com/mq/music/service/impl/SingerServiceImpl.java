@@ -51,5 +51,9 @@ public class SingerServiceImpl implements SingerService {
         return singerMapper.insert(singer);
     }
 
+    @Override
+    public Singer getSingerPictureByName(String singerName) {
+        return singerMapper.getSingerPictureByName(singerName);
+    }
 
 }

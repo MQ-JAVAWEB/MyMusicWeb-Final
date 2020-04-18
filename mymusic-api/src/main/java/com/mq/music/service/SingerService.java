@@ -15,5 +15,5 @@ public interface SingerService {
 
     int saveSinger(Singer singer);
 
-
+    Singer getSingerPictureByName(String singerName);
 }
