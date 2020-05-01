@@ -23,5 +23,9 @@ public interface SongService {
 
     Song getSongById(Integer id);
 
+    int updateClick(Song song);
 
+    Song findById(Integer id);
+
+    Page queryPageAllMusic(Map paramMap);
 }

@@ -109,7 +109,7 @@ public class CommentListController {
             paramMap.put("songId",id);
 
 
-            Page page = commentService.queryPageComment(paramMap);
+            Page page = commentService.queryComment(paramMap);
 
             result.setSuccess(true);
             result.setPage(page);

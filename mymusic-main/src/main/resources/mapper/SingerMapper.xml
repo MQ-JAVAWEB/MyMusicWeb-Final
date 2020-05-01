@@ -76,6 +76,7 @@
     <select id="queryList" resultMap="BaseResultMap">
         select * from t_singer
         <where>
+
             <if test="queryText!=null">name like concat("%",#{queryText},"%")
                 or sex like concat("%",#{queryText},"%")
                 or introduce like concat("%",#{queryText},"%")
@@ -108,7 +109,7 @@
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        *
         from t_singer
         where id = #{id,jdbcType=INTEGER}
     </select>

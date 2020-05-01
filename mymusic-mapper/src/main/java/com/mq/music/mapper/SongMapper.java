@@ -3,7 +3,7 @@ package com.mq.music.mapper;
 import com.mq.music.bean.Song;
 import com.mq.music.bean.SongExample;
 import com.mq.music.vo.Data;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +23,9 @@ public interface SongMapper {
 
     Song selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@RequestParam("record") Song record, @RequestParam("example") SongExample example);
+    int updateByExampleSelective(@Param("record") Song record, @Param("example") SongExample example);
 
-    int updateByExample(@RequestParam("record") Song record, @RequestParam("example") SongExample example);
+    int updateByExample(@Param("record") Song record, @Param("example") SongExample example);
 
     int updateByPrimaryKeySelective(Song record);
 
@@ -49,5 +49,7 @@ public interface SongMapper {
 
     Integer queryOriginalMusicCount(Map paramMap);
 
+    List<Song> queryAllMusicList(Map paramMap);
 
+    Integer queryCountAllMusic(Map paramMap);
 }

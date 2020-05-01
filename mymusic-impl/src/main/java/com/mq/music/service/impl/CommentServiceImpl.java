@@ -49,4 +49,24 @@ public class CommentServiceImpl implements CommentService {
     public int saveComment(Comment comment) {
         return commentMapper.insert(comment);
     }
+
+    @Override
+    public Page queryComment(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+        page.setSongId((Integer) paramMap.get("songId"));
+        Integer songid = page.getSongId();
+        paramMap.put("songid",songid);
+        List<Comment> datas = commentMapper.queryListContent(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = commentMapper.queryListCount(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
 }

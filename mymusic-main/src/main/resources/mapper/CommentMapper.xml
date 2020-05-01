@@ -207,6 +207,10 @@
         limit #{startIndex},#{pagesize}
     </select>
 
+    <select id="queryListCount" resultType="int">
+        select count(*) from t_comment
+        where song_id = #{songid}
+    </select>
     <select id="queryCount" resultType="int">
         select count(*) from t_comment
         <where>

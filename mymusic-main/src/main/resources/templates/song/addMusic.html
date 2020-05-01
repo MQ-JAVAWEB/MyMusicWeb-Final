@@ -120,11 +120,12 @@
                         </div>
                         <div class="form-group">
                             <label for="fsongType" >音乐类型:</label>&nbsp;
-                            <input type="hidden" id="fsongType" name="songType" style="position:absolute;">
+                            <input type="hidden" id="fsongType" name="songtype" style="position:absolute;">
                             <select id="ss"  class="form-control" onchange="selectOption()">
-                                <option value="流行">流行</option>
                                 <option value="轻音乐">轻音乐</option>
+                                <option value="原创">原创</option>
                                 <option value="摇滚">摇滚</option>
+                                <option value="流行">流行</option>
                                 <option value="民谣">民谣</option>
                                 <option value="R&B">R&B</option>
                                 <option value="嘻哈">嘻哈</option>
@@ -140,9 +141,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="furl">上传</label>
+                            <label for="furl">上传音乐</label>
                             <input type="file" class="bg-warning" id="furl" name="uploadFile">
-
+                        </div>
+                        <div class="form-group">
+                            <label for="fpic">上传图片</label>
+                            <input type="file" class="bg-warning" id="fpic" name="uploadFile1">
                         </div>
                         <div class="form-group">
                             <label for="falbum">专辑</label>
@@ -204,11 +208,8 @@
         });
     });
     function selectOption(){
-
-
-            document.getElementById('fsongType').value=
+        document.getElementById('fsongType').value=
             document.getElementById('ss').options[document.getElementById('ss').selectedIndex].value;
-
 
 
     }

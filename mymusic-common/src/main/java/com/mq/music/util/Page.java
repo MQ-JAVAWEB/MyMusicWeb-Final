@@ -8,6 +8,26 @@ public class Page<T> {
     private List<T> datas;
     private Integer totalsize; // 总共多少记录
     private Integer totalno; // 总共多少页
+    private String singer;
+    private Integer songId;
+
+    public Integer getSongId() {
+        return songId;
+    }
+
+    public void setSongId(Integer songId) {
+        this.songId = songId;
+    }
+
+    public String getSinger() {
+        return singer;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+
     public Page(Integer pageno, Integer pagesize) {
         if (pageno <= 0) {
             this.pageno = 1;

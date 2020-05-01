@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" class="app" xmlns:th="http://www.thymeleaf.org" taglib>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Musik | Web Application</title>
+    <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" th:href="@{js/jPlayer/jplayer.flat.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/bootstrap.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/animate.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/font-awesome.min.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/simple-line-icons.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/font.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{css/app.css}" type="text/css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .circles_img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            float: left;
+            margin-left: 50px;
+            box-sizing: content-box;
+            margin-bottom: 40px;
+        }
+        .circles_img img {
+            width: 100%;
+            height: 100%;
+        }
+        .p2 {
+            width:850px;
+            padding-left: 50px;
+
+            /* 盒子溢出 */
+            overflow: hidden;
+            /* 文本溢出 */
+            text-overflow: ellipsis;
+            /* 声明伸缩盒  你就可以控制盒子内部文字的显示行数和方向*/
+            display:-webkit-box;
+            /* 显示2行溢出 */
+            -webkit-line-clamp: 3;
+            /* 文字一行一行垂直显示 */
+            -webkit-box-orient:vertical ;
+            font-size: 15px
+
+        }
+        #tbody1 td {
+            height: 50px;
+            line-height: 30px;
+        }
+        .album {
+            margin-left: 100px;
+        }
+        .album h2 {
+            float: left;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 58px;
+            font-family: 微软雅黑;
+            width: 100%;
+        }
+        .album_ul ul li {
+            list-style: none;
+            float: left;
+            width: 20%;
+        }
+        .album_ul ul li a {
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .album_ul img {
+            width: 200px;
+
+        }
+
+    </style>
+    <!--[if lt IE 9]>
+    <script th:src="@{js/ie/html5shiv.js}"></script>
+    <script th:src="@{js/ie/respond.min.js}"></script>
+    <script th:src="@{js/ie/excanvas.js}"></script>
+    <![endif]-->
+    <style>
+        .mr {
+            margin-top: 20px;
+            margin-right: 3%;
+        }
+    </style>
+</head>
+
+<body class="" onload="pageChange(1)">
+<section class="vbox">
+    <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+        <div class="navbar-header aside bg-info dk nav-xs">
+            <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+                <i class="icon-list"></i>
+            </a>
+            <a th:href="@{member}" class="navbar-brand text-lt">
+                <i class="icon-earphones"></i>
+                <img th:src="@{images/logo.png}" alt="." class="hide">
+                <span class="hidden-nav-xs m-l-sm">Musik</span>
+            </a>
+            <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
+                <i class="icon-settings"></i>
+            </a>
+        </div>
+        <ul class="nav navbar-nav hidden-xs">
+            <li>
+                <a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted">
+                    <i class="fa fa-indent text"></i>
+                    <i class="fa fa-dedent text-active"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="navbar-right ">
+            <ul class="nav navbar-nav m-n hidden-xs nav-user user">
+                <li class="hidden-xs">
+
+                    <section class="dropdown-menu aside-xl animated fadeInUp">
+                        <section class="panel bg-white">
+                            <div class="panel-heading b-light bg-light">
+                                <strong>You have <span class="count">2</span> notifications</strong>
+                            </div>
+                            <div class="list-group list-group-alt">
+                                <a href="#" class="media list-group-item">
+											<span class="pull-left thumb-sm">
+                      <img src="images/a0.png" alt="..." class="img-circle">
+                    </span>
+                                    <span class="media-body block m-b-none">
+                      Use awesome animate.css<br>
+                      <small class="text-muted">10 minutes ago</small>
+                    </span>
+                                </a>
+                                <a href="#" class="media list-group-item">
+											<span class="media-body block m-b-none">
+                      1.0 initial released<br>
+                      <small class="text-muted">1 hour ago</small>
+                    </span>
+                                </a>
+                            </div>
+                            <div class="panel-footer text-sm">
+                                <a href="#" class="pull-right"><i class="fa fa-cog"></i></a>
+                                <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                            </div>
+                        </section>
+                    </section>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
+								<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="images/a0.png" alt="...">
+              </span><span th:text="${session.User.username}"></span> <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight">
+                        <li>
+                            <a th:href="@{toGeRenXinXi}">个人信息</a>
+                        </li>
+                        <li>
+                            <a th:href="@{toAddUserMusic}">上传歌曲</a>
+                        </li>
+                        <hr>
+                        <li>
+                            <a th:href="@{logout}" >注销</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <section class="hbox stretch">
+            <!-- .aside -->
+            <aside class="bg-dark dk nav-xs aside hidden-print" id="nav">
+                <section class="vbox">
+                    <section class="w-f-md scrollable">
+                        <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
+
+                            <!-- nav -->
+                            <nav class="nav-primary hidden-xs">
+                                <ul class="nav bg clearfix">
+                                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
+                                        推荐
+                                    </li>
+                                    <li>
+                                        <a th:href="@{member}">
+                                            <i class="icon-disc icon text-success"></i>
+                                            <span class="font-bold">发现音乐</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{toMusic}">
+                                            <i class="icon-music-tone-alt icon text-info"></i>
+                                            <span class="font-bold">音乐</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{toSinger}" data-target="#content" data-el="#bjax-el" data-replace="true">
+                                            <i class="icon-social-youtube icon  text-primary"></i>
+                                            <span class="font-bold">歌手</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{toTuiJian}">
+                                            <i class="icon-drawer icon text-primary-lter"></i>
+                                            <span class="font-bold">推荐</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="m-b hidden-nav-xs"></li>
+                                </ul>
+
+                            </nav>
+                            <!-- / nav -->
+                        </div>
+                    </section>
+
+                </section>
+            </aside>
+            <!-- /.aside -->
+            <section id="content">
+                <section class="vbox bg-white">
+
+                    <section class="scrollable wrapper">
+                        <div class="col-lg-12" id="content-int">
+                            <div class="circles_img">
+                                <input type="hidden" id="singerPICture" th:value="${session.singer.picture}">
+                                <img id="singerPic" src=""/>
+                            </div>
+                            <div >
+                                <p style="padding-left: 300px;font-size: 50px;" id="pSingerName" th:text="${session.singer.name}"></p>
+                                <p class="p2" th:text="${session.singer.introduce}"></p>
+                            </div>
+                        </div>
+                        <table class="table table-striped" style="margin-left: 100px;box-sizing: border-box;width: 85%;">
+                            <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>歌名</td>
+                                <td>专辑</td>
+                                <td>播放量</td>
+
+                            </tr>
+                            </thead>
+                            <tbody id="tbody1">
+
+                            </tbody>
+                            <tfoot >
+                            <tr>
+                                <td colspan="6" align="center">
+                                    <ul class="pagination" >
+
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            </tfoot>
+                        </table>
+                        <div class="album" style="margin-bottom: 200px">
+                            <h2>专辑</h2>
+                            <div class="album_ul clearfix" >
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <img src="images/18740076185638788.png"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="images/18740076185638788.png"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="images/18740076185638788.png"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="images/18740076185638788.png"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="images/18740076185638788.png"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>
+</section>
+<script th:src="@{js/jquery.min.js }"></script>
+<!-- Bootstrap -->
+<script th:src="@{js/bootstrap.js} "></script>
+<!-- App -->
+<script th:src="@{js/app.js }"></script>
+<script th:src="@{js/slimscroll/jquery.slimscroll.min.js }"></script>
+<script th:src="@{js/app.plugin.js }"></script>
+<script type="text/javascript " th:src="@{js/jPlayer/jquery.jplayer.min.js }"></script>
+<script type="text/javascript " th:src="@{js/jPlayer/add-on/jplayer.playlist.min.js} "></script>
+<script type="text/javascript " th:src="@{js/jPlayer/demo.js }"></script>
+<script th:src="@{backstage/jquery/layer/layer.js}"></script>
+<script>
+    function pageChange(pageno) {
+        //window.location.href="${APP_PATH}/user/userList.do?pageno="+pageno
+
+        queryPageMusic(pageno);
+        queryPageOriginalMusic(pageno);
+
+    }
+    var singerPICture = $("#singerPICture").val();
+    console.log(singerPICture);
+    var pic =document.getElementById("singerPic");
+    console.log(pic);
+    pic.src = "song_js/playlist/covers/" + singerPICture;
+    var singer = $("#pSingerName").text();
+    console.log(singer);
+    var jsonObj = {
+        "pageno" : 1,
+        "pagesize" : 5,
+        "singer" : singer
+    }
+
+    var loadingIndex = -1;
+
+
+
+    function queryPageMusic(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type : "POST",
+                data : jsonObj,
+                url : "SingerMusic",
+                beforeSend : function() {
+                    loadingIndex = layer.load(2, {
+                        time : 10 * 1000
+                    });
+                    return true;
+                },
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data,function(i, n) {
+
+                            content += '<tr>';
+                            content += '  <td>'
+                                + (i + 1) + '</td>';
+                            content += '  <td>'
+                                + n.name
+                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                            content += '  <td>'
+                                + n.album
+                                + '</td>';
+                            content += '  <td>'
+                                + n.clicknum + '</td>';
+                            content += '</tr>';
+
+                        });
+
+                        $("#tbody1").html(content);
+
+                        var contentBar = '';
+
+                        if (page.pageno == 1) {
+                            contentBar += '<li class="disabled"><a href="#">上一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno - 1) + ')">上一页</a></li>';
+                        }
+
+                        for (var i = 1; i <= page.totalno; i++) {
+                            contentBar += '<li ';
+                            if (page.pageno == i) {
+                                contentBar += 'class="active"';
+                            }
+                            contentBar += '><a href="#" onclick="pageChange('
+                                + i + ')">' + i + '</a></li>';
+                        }
+
+                        if (page.pageno == page.totalno) {
+                            contentBar += '<li class="disabled"><a href="#" >下一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno + 1) + ')">下一页</a></li>';
+                        }
+
+                        $(".pagination").html(contentBar);
+
+                    } else {
+                        layer.msg(result.msg, {
+                            time : 1000,
+                            icon : 5,
+                            shift : 6
+                        });
+                    }
+                },
+                error : function() {
+                    layer.msg("加载失败", {
+                        time : 1000,
+                        icon : 5,
+                        shift : 6
+                    });
+                }
+
+            });
+    }
+
+
+    // function queryPageOriginalMusic(pageno) {
+    //     jsonObj.pageno = pageno;
+    //     $
+    //         .ajax({
+    //             type : "POST",
+    //             data : jsonObj,
+    //             url : "mainOriginalMusic",
+    //             beforeSend : function() {
+    //                 loadingIndex = layer.load(2, {
+    //                     time : 10 * 1000
+    //                 });
+    //                 return true;
+    //             },
+    //             success : function(result) {
+    //                 layer.close(loadingIndex);
+    //                 if (result.success) {
+    //                     var page = result.page;
+    //                     var data = page.datas;
+    //
+    //                     var content = '';
+    //
+    //                     $.each(data,function(i, n) {
+    //
+    //                         content += '<tr>';
+    //                         content += '  <td>'
+    //                             + (i + 1) + '</td>';
+    //                         content += '  <td>'
+    //                             + n.name
+    //                             + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+    //                         content += '</tr>';
+    //
+    //                     });
+    //
+    //                     $("#tbody4").html(content);
+    //                 } else {
+    //                     layer.msg(result.msg, {
+    //                         time : 1000,
+    //                         icon : 5,
+    //                         shift : 6
+    //                     });
+    //                 }
+    //             },
+    //             error : function() {
+    //                 layer.msg("加载失败", {
+    //                     time : 1000,
+    //                     icon : 5,
+    //                     shift : 6
+    //                 });
+    //             }
+    //
+    //         });
+    // }
+
+</script>
+</body>
+</html>

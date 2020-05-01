@@ -33,31 +33,48 @@ public class SongListController {
     }
 
     public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/";
+    public final static String UPLOAD_PATH_PIC="/static/song_js/playlist/covers/";
     @RequestMapping("/doAddMusic")
-        public Object doAddMusic(@RequestParam("uploadFile") MultipartFile uploadFile, Song song, HttpServletRequest request) {
+    public Object doAddMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1, Song song, HttpServletRequest request) {
         AjaxResult result = new AjaxResult();
         song.setUrl(uploadFile.getOriginalFilename());
+        song.setPic(uploadFile1.getOriginalFilename());
         try {
             if (uploadFile.isEmpty()){
                 result.setMessage("请选择上传文件！");
                 return result;
             }
+            if (uploadFile1.isEmpty()){
+                result.setMessage("请选择上传文件！");
+                return result;
+            }
             String realPath = new String("mymusic-main/src/main/resources/" + UPLOAD_PATH_PREFIX);
+            String realPathPic = new String("mymusic-main/src/main/resources/" + UPLOAD_PATH_PIC);
             File file = new File(realPath);
+            File file1 = new File(realPathPic);
             if (!file.isDirectory()){
                 file.mkdirs();
+            }
+            if (!file1.isDirectory()){
+                file1.mkdirs();
             }
 //            String pictureUrl=singer.getPicture();
 //            String[] url=pictureUrl.split("\\\\");
             String Name= changeEnglish.change(song.getUrl());
             String newUrlName= uuidSplit.createUUID(6)+Name;
+            String PicName= changeEnglish.change(song.getPic());
+            String newPicName= uuidSplit.createUUID(6)+PicName;
 
             File newFile = new File(file.getAbsolutePath() + File.separator + newUrlName);
+            File newFile1 = new File(file1.getAbsolutePath() + File.separator + newPicName);
             //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
             uploadFile.transferTo(newFile);
+            uploadFile1.transferTo(newFile1);
             String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/" + newUrlName;
+            String filePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/covers/" + newPicName;
             song.setUrl(newUrlName);
-
+            song.setPic(newPicName);
+            song.setSongtype(song.getSongtype());
             int count = songService.saveMusic(song);
             if (count!=1){
                 return "/toAddMusic";
@@ -66,6 +83,60 @@ public class SongListController {
             e.printStackTrace();
         }
         return "redirect:/toMusicList";
+    }
+
+
+
+    @RequestMapping("/doAddUserMusic")
+    public Object doAddUserMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1,Song song, HttpServletRequest request) {
+            AjaxResult result = new AjaxResult();
+            song.setUrl(uploadFile.getOriginalFilename());
+            song.setPic(uploadFile1.getOriginalFilename());
+
+            try {
+                if (uploadFile.isEmpty()){
+                    result.setMessage("请选择上传文件！");
+                    return result;
+                }
+                if (uploadFile1.isEmpty()){
+                    result.setMessage("请选择上传文件！");
+                    return result;
+                }
+                String realPath = new String("mymusic-main/src/main/resources/" + UPLOAD_PATH_PREFIX);
+                String realPathPic = new String("mymusic-main/src/main/resources/" + UPLOAD_PATH_PIC);
+                File file = new File(realPath);
+                File file1 = new File(realPathPic);
+                if (!file.isDirectory()){
+                    file.mkdirs();
+                }
+                if (!file1.isDirectory()){
+                    file1.mkdirs();
+                }
+//            String pictureUrl=singer.getPicture();
+//            String[] url=pictureUrl.split("\\\\");
+                String Name= changeEnglish.change(song.getUrl());
+                String newUrlName= uuidSplit.createUUID(6)+Name;
+                String PicName= changeEnglish.change(song.getPic());
+                String newPicName= uuidSplit.createUUID(6)+PicName;
+
+                File newFile = new File(file.getAbsolutePath() + File.separator + newUrlName);
+                File newFile1 = new File(file1.getAbsolutePath() + File.separator + newPicName);
+                //转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
+                uploadFile.transferTo(newFile);
+                uploadFile1.transferTo(newFile1);
+                String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/" + newUrlName;
+                String filePath1 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/covers" + newPicName;
+                song.setUrl(newUrlName);
+                song.setPic(newPicName);
+                song.setSongtype(song.getSongtype());
+                int count = songService.saveMusic(song);
+            if (count!=1){
+                return "/toAddUserMusic";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/member";
     }
 
 

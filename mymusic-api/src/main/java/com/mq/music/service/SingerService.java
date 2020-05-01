@@ -16,4 +16,6 @@ public interface SingerService {
     int saveSinger(Singer singer);
 
     Singer getSingerPictureByName(String singerName);
+
+    Singer querySingerById(Integer id);
 }

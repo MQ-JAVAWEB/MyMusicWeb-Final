@@ -15,9 +15,11 @@ public class Song implements Serializable {
 
     private String createtime;
 
-    private String songType;
+    private String songtype;
 
     private String album;
+
+    private String pic;
 
     private static final long serialVersionUID = 1L;
 
@@ -66,15 +68,15 @@ public class Song implements Serializable {
     }
 
     public void setCreatetime(String createtime) {
-        this.createtime = createtime;
+        this.createtime = createtime == null ? null : createtime.trim();
     }
 
-    public String getSongType() {
-        return songType;
+    public String getSongtype() {
+        return songtype;
     }
 
-    public void setSongType(String songType) {
-        this.songType = songType == null ? null : songType.trim();
+    public void setSongtype(String songtype) {
+        this.songtype = songtype == null ? null : songtype.trim();
     }
 
     public String getAlbum() {
@@ -83,5 +85,13 @@ public class Song implements Serializable {
 
     public void setAlbum(String album) {
         this.album = album == null ? null : album.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic == null ? null : pic.trim();
     }
 }

@@ -56,4 +56,9 @@ public class SingerServiceImpl implements SingerService {
         return singerMapper.getSingerPictureByName(singerName);
     }
 
+    @Override
+    public Singer querySingerById(Integer id) {
+        return singerMapper.selectByPrimaryKey(id);
+    }
+
 }

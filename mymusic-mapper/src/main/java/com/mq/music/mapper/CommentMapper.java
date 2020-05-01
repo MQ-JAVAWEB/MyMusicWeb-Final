@@ -40,4 +40,6 @@ public interface CommentMapper {
     int deleteBachComment(Data data);
 
     List<Comment> queryListContent(Map paramMap);
+
+    Integer queryListCount(Map paramMap);
 }

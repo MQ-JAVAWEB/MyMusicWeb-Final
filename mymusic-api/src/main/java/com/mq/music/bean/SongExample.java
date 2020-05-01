@@ -1,7 +1,6 @@
 package com.mq.music.bean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SongExample {
@@ -445,123 +444,133 @@ public class SongExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
+        public Criteria andCreatetimeEqualTo(String value) {
             addCriterion("createtime =", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
+        public Criteria andCreatetimeNotEqualTo(String value) {
             addCriterion("createtime <>", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
+        public Criteria andCreatetimeGreaterThan(String value) {
             addCriterion("createtime >", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeGreaterThanOrEqualTo(String value) {
             addCriterion("createtime >=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
+        public Criteria andCreatetimeLessThan(String value) {
             addCriterion("createtime <", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeLessThanOrEqualTo(String value) {
             addCriterion("createtime <=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
+        public Criteria andCreatetimeLike(String value) {
+            addCriterion("createtime like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotLike(String value) {
+            addCriterion("createtime not like", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<String> values) {
             addCriterion("createtime in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
+        public Criteria andCreatetimeNotIn(List<String> values) {
             addCriterion("createtime not in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeBetween(String value1, String value2) {
             addCriterion("createtime between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeNotBetween(String value1, String value2) {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeIsNull() {
-            addCriterion("song_type is null");
+        public Criteria andSongtypeIsNull() {
+            addCriterion("songType is null");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeIsNotNull() {
-            addCriterion("song_type is not null");
+        public Criteria andSongtypeIsNotNull() {
+            addCriterion("songType is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeEqualTo(String value) {
-            addCriterion("song_type =", value, "songType");
+        public Criteria andSongtypeEqualTo(String value) {
+            addCriterion("songType =", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeNotEqualTo(String value) {
-            addCriterion("song_type <>", value, "songType");
+        public Criteria andSongtypeNotEqualTo(String value) {
+            addCriterion("songType <>", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeGreaterThan(String value) {
-            addCriterion("song_type >", value, "songType");
+        public Criteria andSongtypeGreaterThan(String value) {
+            addCriterion("songType >", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("song_type >=", value, "songType");
+        public Criteria andSongtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("songType >=", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeLessThan(String value) {
-            addCriterion("song_type <", value, "songType");
+        public Criteria andSongtypeLessThan(String value) {
+            addCriterion("songType <", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeLessThanOrEqualTo(String value) {
-            addCriterion("song_type <=", value, "songType");
+        public Criteria andSongtypeLessThanOrEqualTo(String value) {
+            addCriterion("songType <=", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeLike(String value) {
-            addCriterion("song_type like", value, "songType");
+        public Criteria andSongtypeLike(String value) {
+            addCriterion("songType like", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeNotLike(String value) {
-            addCriterion("song_type not like", value, "songType");
+        public Criteria andSongtypeNotLike(String value) {
+            addCriterion("songType not like", value, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeIn(List<String> values) {
-            addCriterion("song_type in", values, "songType");
+        public Criteria andSongtypeIn(List<String> values) {
+            addCriterion("songType in", values, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeNotIn(List<String> values) {
-            addCriterion("song_type not in", values, "songType");
+        public Criteria andSongtypeNotIn(List<String> values) {
+            addCriterion("songType not in", values, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeBetween(String value1, String value2) {
-            addCriterion("song_type between", value1, value2, "songType");
+        public Criteria andSongtypeBetween(String value1, String value2) {
+            addCriterion("songType between", value1, value2, "songtype");
             return (Criteria) this;
         }
 
-        public Criteria andSongTypeNotBetween(String value1, String value2) {
-            addCriterion("song_type not between", value1, value2, "songType");
+        public Criteria andSongtypeNotBetween(String value1, String value2) {
+            addCriterion("songType not between", value1, value2, "songtype");
             return (Criteria) this;
         }
 
@@ -632,6 +641,76 @@ public class SongExample {
 
         public Criteria andAlbumNotBetween(String value1, String value2) {
             addCriterion("album not between", value1, value2, "album");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIsNull() {
+            addCriterion("pic is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIsNotNull() {
+            addCriterion("pic is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicEqualTo(String value) {
+            addCriterion("pic =", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotEqualTo(String value) {
+            addCriterion("pic <>", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThan(String value) {
+            addCriterion("pic >", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicGreaterThanOrEqualTo(String value) {
+            addCriterion("pic >=", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThan(String value) {
+            addCriterion("pic <", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLessThanOrEqualTo(String value) {
+            addCriterion("pic <=", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicLike(String value) {
+            addCriterion("pic like", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotLike(String value) {
+            addCriterion("pic not like", value, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicIn(List<String> values) {
+            addCriterion("pic in", values, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotIn(List<String> values) {
+            addCriterion("pic not in", values, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicBetween(String value1, String value2) {
+            addCriterion("pic between", value1, value2, "pic");
+            return (Criteria) this;
+        }
+
+        public Criteria andPicNotBetween(String value1, String value2) {
+            addCriterion("pic not between", value1, value2, "pic");
             return (Criteria) this;
         }
     }

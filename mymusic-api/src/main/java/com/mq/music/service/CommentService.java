@@ -14,4 +14,6 @@ public interface CommentService {
     int deleteBachComment(Data data);
 
     int saveComment(Comment comment);
+
+    Page queryComment(Map paramMap);
 }

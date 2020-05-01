@@ -13,14 +13,21 @@
     <link rel="stylesheet" th:href="@{css/simple-line-icons.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{css/font.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{css/app.css}" type="text/css" />
+
     <!--[if lt IE 9]>
     <script th:src="@{js/ie/html5shiv.js}"></script>
     <script th:src="@{js/ie/respond.min.js}"></script>
     <script th:src="@{js/ie/excanvas.js}"></script>
     <![endif]-->
+    <style>
+        .mr {
+            margin-top: 20px;
+            margin-right: 3%;
+        }
+    </style>
 </head>
 
-<body class="">
+<body class="" onload="pageChange(1)">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
         <div class="navbar-header aside bg-info dk nav-xs">
@@ -89,7 +96,7 @@
                             <a th:href="@{toGeRenXinXi}">个人信息</a>
                         </li>
                         <li>
-                            <a th:href="@{toRegSinger}">注册歌手</a>
+                            <a th:href="@{toAddUserMusic}">上传歌曲</a>
                         </li>
                         <hr>
                         <li>
@@ -155,60 +162,7 @@
                 <section class="vbox">
                     <section class="scrollable">
                         <section class="hbox stretch">
-                            <!-- side content -->
-                            <aside class="aside bg-light dk" id="sidebar">
-                                <section class="vbox animated fadeInUp">
-                                    <section class="scrollable hover">
-                                        <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                            <a href="genres.html" class="list-group-item">
-                                                全部
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                华语男歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                华语女歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                华语组合/乐队
-                                            </a>
-                                            <hr />
-                                            <a href="genres.html" class="list-group-item">
-                                                欧美男歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                欧美女歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                欧美组合/乐队
-                                            </a>
-                                            <hr />
-                                            <a href="genres.html" class="list-group-item">
-                                                日本男歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                日本女歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                日本组合/乐队
 
-                                            </a>
-                                            <hr />
-                                            <a href="genres.html" class="list-group-item">
-                                                其他男歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                其他女歌手
-                                            </a>
-                                            <a href="genres.html" class="list-group-item">
-                                                其他组合/乐队
-                                            </a>
-
-                                        </div>
-                                    </section>
-                                </section>
-                            </aside>
-                            <!-- / side content -->
                             <section>
                                 <section class="vbox">
                                     <section class="scrollable padder-lg">
@@ -220,616 +174,21 @@
 
                                             <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 ">
                                                 <div style="margin-bottom: 20px; ">
-                                                    <h3 style="margin-left: 2%;float: left;margin-right: 20px; ">
-                                                        华语男歌手
-                                                    </h3>
-                                                    <br />
+                                                    <h3 style="margin-left: 2%;" id="liuxing">歌手</h3>
                                                     <div class="input-group " >
 																		<span class="input-group-btn ">
-              											<button type="submit " class="btn btn-sm bg-white btn-icon rounded ">
+              											<button type="submit " id="queryBtn"   style="height: 40px" class="btn btn-sm bg-white btn-icon rounded ">
               												<i class="fa fa-search "></i>
               											</button>
             												</span>
-                                                        <input type="text " class="form-control input-sm no-border rounded " placeholder="Search songs, albums... ">
+                                                        <input id="queryText" type="text " class="form-control input-sm no-border rounded "  style="height: 40px;font-size: 15px" placeholder="Search songs, albums... ">
                                                     </div>
                                                     <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                    <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130" alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130" alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130" alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
+                                                    <div  id="content1">
 
-                                                    <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130" alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
-                                                    </div>
-                                                    <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                        <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                        <p>颜人中</p>
+
                                                     </div>
                                                 </div>
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    华语女歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    华语组合/乐队
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    欧美男歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    欧美女歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    欧美组合/乐队
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    日本男歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    日本女歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    日本组合/乐队
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    其他男歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    其他女歌手
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-
-                                                <h3 style="margin-left: 2%;margin-right: 20px;margin-top: 0px; margin-bottom: 0; ">
-                                                    其他组合/乐队
-                                                </h3>
-
-
-                                                <div style="width:100%; border:1px solid red;margin-top: 10px; "></div>
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-
-                                                <div style="margin-top: 20px; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/F9asgcj7C7qSl_je9XDvRw==/603631883675241.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/7BUW9dnqOMF1dn3ioKJOMg==/109951162820707114.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/TiRAIiIihOgtBgYB6DZRXA==/109951162916034289.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="http://p2.music.126.net/w_UWOls2uCkFN_U62788Xg==/18806046882229308.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-                                                </div>
-                                                <div style="margin-top: 20px;margin-left: 3%; " class="col-lg-2 ">
-                                                    <img src="https://p2.music.126.net/jq8QrogorsmwJv3Xn7_UOQ==/109951163765021940.jpg?param=130y130 " alt=" " />
-                                                    <p>颜人中</p>
-
-
-
-                                                </div>
-
                                             </div>
                                         </div>
                                         </div>
@@ -858,6 +217,82 @@
 <script type="text/javascript " th:src="@{js/jPlayer/jquery.jplayer.min.js }"></script>
 <script type="text/javascript " th:src="@{js/jPlayer/add-on/jplayer.playlist.min.js} "></script>
 <script type="text/javascript " th:src="@{js/jPlayer/demo.js }"></script>
+<script th:src="@{backstage/jquery/layer/layer.js}"></script>
+<script>
+    function pageChange(pageno) {
+        //window.location.href="${APP_PATH}/user/userList.do?pageno="+pageno
+        queryPageSinger(pageno);
+
+    }
+
+    var jsonObj = {
+        "pageno" : 1,
+        "pagesize" : 20
+    }
+
+    var loadingIndex = -1;
+    function queryPageSinger(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type : "POST",
+                data : jsonObj,
+                url : "queryAllSinger",
+                beforeSend : function() {
+                    loadingIndex = layer.load(2, {
+                        time : 10 * 1000
+                    });
+                    return true;
+                },
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data,function(i, n) {
+
+
+                            content += ' <div s class="col-lg-2 mr" style="float: left">';
+                            content += '<a style="display: block;cursor: pointer" onclick="window.location.href=\'toSingerShow?id='+ n.id+ '&singer='+n.name+'\'">';
+
+                            content += '<img style="width:130px ;height: 130px " src="song_js/playlist/covers/'+n.picture+'" alt=" " />';
+                            content += '<p style="text-align: center;font-size: 20px">'
+                                + n.name
+                                + '</p>';
+                            content += '</a>';
+                            content += '</div>';
+                        });
+
+                        $("#content1").html(content);
+                    } else {
+                        layer.msg(result.msg, {
+                            time : 1000,
+                            icon : 5,
+                            shift : 6
+                        });
+                    }
+                },
+                error : function() {
+                    layer.msg("加载失败", {
+                        time : 1000,
+                        icon : 5,
+                        shift : 6
+                    });
+                }
+
+            });
+    }
+    $("#queryBtn").click(function () {
+        var queryText = $("#queryText").val();
+        jsonObj.queryText = queryText;
+        queryPageSinger(1);
+
+    });
+
+</script>
 </body>
 
 </html>

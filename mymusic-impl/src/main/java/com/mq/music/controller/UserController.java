@@ -1,18 +1,26 @@
 package com.mq.music.controller;
 
-import com.mq.music.bean.Singer;
 import com.mq.music.bean.Song;
 import com.mq.music.service.SingerService;
 import com.mq.music.service.SongService;
 import com.mq.music.service.TuiJianService;
 import com.mq.music.util.AjaxResult;
 import com.mq.music.util.Page;
+import com.mq.music.util.StringUtil;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,9 +52,9 @@ public class UserController {
         return "index/gerenxinxi";
     }
 
-    @RequestMapping("/toRegSinger")
+    @RequestMapping("/toAddUserMusic")
     public String toRegSinger(){
-        return "index/regSinger";
+        return "index/addMusic";
     }
 
 
@@ -66,10 +74,85 @@ public class UserController {
     @RequestMapping("/toBofangqi")
     public String toBofangqi( Integer id,Map map,@RequestParam("singer") String singerName){
         Song song=songService.getSongById(id);
-        Singer singer=singerService.getSingerPictureByName(singerName);
+
+        int count =song.getClicknum();
+        count ++;
+        song.setClicknum(count);
+        int  click= songService.updateClick(song);
+
         map.put("song",song);
-        map.put("singer",singer);
+
         return "index/bofang";
+    }
+
+
+
+    @RequestMapping("/downLoadMusic")
+    private void downLoadMusic (Integer id,HttpServletResponse response) throws IOException {
+        Song song = songService.findById(id);
+        String realPath  = ResourceUtils.getURL("classpath:").getPath()+"/static/song_js/playlist/"+ song.getUrl();
+        String songName = song.getName()+"-"+song.getSinger()+".mp3";
+        FileInputStream is=new FileInputStream(new File(realPath));
+        response.setHeader("content-disposition","attachment;fileName="+ URLEncoder.encode(songName,"UTF-8"));
+        ServletOutputStream os = response.getOutputStream();
+        IOUtils.copy(is,os);
+        IOUtils.closeQuietly(is);
+        IOUtils.closeQuietly(os);
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryAllSinger")
+    public Object queryAllSinger(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
+                             @RequestParam(value = "pagesize", required = false, defaultValue = "20") Integer pagesize,
+                             String queryText) {
+        AjaxResult result = new AjaxResult();
+        try {
+
+            Map paramMap = new HashMap();
+            paramMap.put("pageno", pageno);
+            paramMap.put("pagesize", pagesize);
+            //paramMap.put("queryText", queryText);
+
+            if (StringUtil.isNotEmpty(queryText)) {
+                paramMap.put("queryText", queryText);
+            }
+
+            Page page = singerService.queryPage(paramMap);
+
+            result.setSuccess(true);
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("查询数据失败");
+        }
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("/queryAllMusic")
+    public Object queryAllMusic(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
+                               @RequestParam(value = "pagesize", required = false, defaultValue = "20") Integer pagesize
+    ,String queryText) {
+        AjaxResult result = new AjaxResult();
+        try {
+
+            Map paramMap = new HashMap();
+            paramMap.put("pageno", pageno);
+            paramMap.put("pagesize", pagesize);
+            paramMap.put("queryText", queryText);
+
+            Page page = songService.queryPageSong(paramMap);
+
+            result.setSuccess(true);
+            result.setPage(page);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("查询失败");
+        }
+        return result;
     }
 
     @ResponseBody
@@ -96,8 +179,6 @@ public class UserController {
         }
         return result;
     }
-
-
 
 
     @ResponseBody
@@ -151,30 +232,30 @@ public class UserController {
         return result;
     }
 
-    @ResponseBody
-    @RequestMapping("/mainTuiJianMusic")
-    public Object mainTuiJianMusic(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
-                                    @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize
-    ) {
-        AjaxResult result = new AjaxResult();
-        try {
-
-            Map paramMap = new HashMap();
-            paramMap.put("pageno", pageno);
-            paramMap.put("pagesize", pagesize);
-            //paramMap.put("queryText", queryText);
-
-            Page page = tuiJianService.queryPageTuiJianMusic(paramMap);
-
-            result.setSuccess(true);
-            result.setPage(page);
-        } catch (Exception e) {
-            result.setSuccess(false);
-            e.printStackTrace();
-            result.setMessage("查询失败");
-        }
-        return result;
-    }
+//    @ResponseBody
+//    @RequestMapping("/mainTuiJianMusic")
+//    public Object mainTuiJianMusic(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
+//                                    @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize
+//    ) {
+//        AjaxResult result = new AjaxResult();
+//        try {
+//
+//            Map paramMap = new HashMap();
+//            paramMap.put("pageno", pageno);
+//            paramMap.put("pagesize", pagesize);
+//            //paramMap.put("queryText", queryText);
+//
+//            Page page = tuiJianService.queryPageTuiJianMusic(paramMap);
+//
+//            result.setSuccess(true);
+//            result.setPage(page);
+//        } catch (Exception e) {
+//            result.setSuccess(false);
+//            e.printStackTrace();
+//            result.setMessage("查询失败");
+//        }
+//        return result;
+//    }
 
 
 }

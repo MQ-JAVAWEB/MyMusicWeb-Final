@@ -20,7 +20,7 @@
     <![endif]-->
 </head>
 
-<body class="">
+<body class="" onload="pageChange(1)">
 <section class="vbox">
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
         <div class="navbar-header aside bg-info dk nav-xs">
@@ -89,7 +89,7 @@
                             <a th:href="@{toGeRenXinXi}">个人信息</a>
                         </li>
                         <li>
-                            <a th:href="@{toRegSinger}">注册歌手</a>
+                            <a th:href="@{toAddUserMusic}">上传歌曲</a>
                         </li>
                         <hr>
                         <li>
@@ -154,65 +154,7 @@
                 <section class="vbox">
                     <section class="scrollable">
                         <section class="hbox stretch">
-                            <!-- side content -->
-                            <aside class="aside bg-light dk" id="sidebar">
-                                <section class="vbox animated fadeInUp">
-                                    <section class="scrollable hover">
-                                        <div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                                            <a href="" class="list-group-item">
-                                                全部
-                                            </a>
-                                            <a href="#liuxing" class="list-group-item">
-                                                流行
-                                            </a>
-                                            <a href="#yaogun" class="list-group-item">
-                                                摇滚
-                                            </a>
-                                            <a href="#qingyinyue" class="list-group-item">
-                                                轻音乐
-                                            </a>
-                                            <a href="#gudian" class="list-group-item">
-                                                古典
-                                            </a>
-                                            <a href="#minyao" class="list-group-item">
-                                                民谣
-                                            </a>
-                                            <a href="#R&B" class="list-group-item">
-                                                R&B
-                                            </a>
-                                            <a href="#xiha" class="list-group-item">
-                                                嘻哈
-                                            </a>
-                                            <a href="#dianzi" class="list-group-item">
-                                                电子
-                                            </a>
-                                            <a href="#xaingcun" class="list-group-item">
-                                                乡村
-                                            </a>
-                                            <a href="#landiao" class="list-group-item">
-                                                蓝调
-                                            </a>
-                                            <a href="#xinshiji" class="list-group-item">
-                                                新世纪
-                                            </a>
-                                            <a href="#lading" class="list-group-item">
-                                                拉丁
-                                            </a>
-                                            <a href="#houyao" class="list-group-item">
-                                                后摇
-                                            </a>
-                                            <a href="#zhongguochuantong" class="list-group-item">
-                                                中国传统
-                                            </a>
-                                            <a href="#shijieyinyue" class="list-group-item">
-                                                世界音乐
-                                            </a>
 
-                                        </div>
-                                    </section>
-                                </section>
-                            </aside>
-                            <!-- / side content -->
                             <section>
                                 <section class="vbox">
                                     <section class="scrollable padder-lg">
@@ -222,7 +164,15 @@
                                                 <div class="row">
                                                     <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="liuxing">流行</h3>
+                                                            <h3 style="margin-left: 2%;" id="liuxing">全部歌曲</h3>
+                                                            <div class="input-group " >
+																		<span class="input-group-btn ">
+              											<button type="submit " id="queryBtn"   style="height: 40px" class="btn btn-sm bg-white btn-icon rounded ">
+              												<i class="fa fa-search "></i>
+              											</button>
+            												</span>
+                                                                <input id="queryText" type="text " class="form-control input-sm no-border rounded "  style="height: 40px;font-size: 15px" placeholder="Search songs, albums... ">
+                                                            </div>
                                                             <div style="width:100%; border:1px solid red;"></div>
                                                             <table class="table table-striped">
                                                                 <tr>
@@ -232,827 +182,24 @@
                                                                     <td>歌手</td>
 
                                                                 </tr>
+                                                                <tbody id="tbody1">
+
+                                                                </tbody>
+                                                                <tfoot>
                                                                 <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
+                                                                    <td colspan="6" align="center">
+                                                                        <ul class="pagination">
 
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
+                                                                        </ul>
+                                                                    </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
 
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
+                                                                </tfoot>
                                                             </table>
                                                         </div>
 
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="yaogun">摇滚</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
 
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
 
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="qingyinyue">轻音乐</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="gudian">古典</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="minyao">民谣</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="R&B">R&B</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="xiha">嘻哈</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="dianzi">电子</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                            <h3 style="margin-left: 2%;" id="xiangcun">乡村</h3>
-                                                            <div style="width:100%; border:1px solid red;"></div>
-                                                            <table class="table table-striped">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>标题</td>
-                                                                    <td>专辑</td>
-                                                                    <td>歌手</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>父亲写的散文诗<a href="">
-                                                                        <!--<img th:src="@{images/start.png}" style="width: 20px;margin-left: 10px;" alt="" />-->
-
-
-                                                                        <img th:src="@{/images/g4.png}" height="20"
-                                                                             width="20" style="margin-left: 10px"/></a></td>
-                                                                    <td>中国新声代 第五季 第四期</td>
-                                                                    <td>刘乐瑶</td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
 
                                                     </div>
                                                     <div class="col-md-2 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
@@ -1086,6 +233,113 @@
 <script type="text/javascript" th:src="@{js/jPlayer/jquery.jplayer.min.js}"></script>
 <script type="text/javascript" th:src="@{js/jPlayer/add-on/jplayer.playlist.min.js}"></script>
 <script type="text/javascript" th:src="@{js/jPlayer/demo.js}"></script>
+<script>
+
+    function pageChange(pageno) {
+        //window.location.href="${APP_PATH}/user/userList.do?pageno="+pageno
+        queryPageMusic(pageno);
+    }
+
+    var jsonObj = {
+        "pageno": 1,
+        "pagesize": 20
+    }
+
+    var loadingIndex = -1;
+
+    function queryPageMusic(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type : "POST",
+                data : jsonObj,
+                url : "queryAllMusic",
+                beforeSend : function() {
+                    loadingIndex = layer.load(2, {
+                        time : 10 * 1000
+                    });
+                    return true;
+                },
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data,function(i, n) {
+
+                            content += '<tr>';
+                            content += '  <td>'
+                                + (i + 1) + '</td>';
+                            content += '  <td>'
+                                + n.name
+                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                            content += '  <td>'
+                                + n.album
+                                + '</td>';
+                            content += '  <td>'
+                                + n.singer + '</td>';
+                            content += '</tr>';
+
+                        });
+
+                        $("#tbody1").html(content);
+
+                        var contentBar = '';
+
+                        if (page.pageno == 1) {
+                            contentBar += '<li class="disabled"><a href="#">上一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno - 1) + ')">上一页</a></li>';
+                        }
+
+                        for (var i = 1; i <= page.totalno; i++) {
+                            contentBar += '<li ';
+                            if (page.pageno == i) {
+                                contentBar += 'class="active"';
+                            }
+                            contentBar += '><a href="#" onclick="pageChange('
+                                + i + ')">' + i + '</a></li>';
+                        }
+
+                        if (page.pageno == page.totalno) {
+                            contentBar += '<li class="disabled"><a href="#" >下一页</a></li>';
+                        } else {
+                            contentBar += '<li><a href="#" onclick="pageChange('
+                                + (pageno + 1) + ')">下一页</a></li>';
+                        }
+
+                        $(".pagination").html(contentBar);
+
+                    } else {
+                        layer.msg(result.msg, {
+                            time: 1000,
+                            icon: 5,
+                            shift: 6
+                        });
+                    }
+                },
+                error: function () {
+                    layer.msg("加载失败", {
+                        time: 1000,
+                        icon: 5,
+                        shift: 6
+                    });
+                }
+
+            });
+    }
+
+    $("#queryBtn").click(function () {
+        var queryText = $("#queryText").val();
+        jsonObj.queryText = queryText;
+        queryPageMusic(1);
+
+    });
+</script>
 </body>
 
 </html>

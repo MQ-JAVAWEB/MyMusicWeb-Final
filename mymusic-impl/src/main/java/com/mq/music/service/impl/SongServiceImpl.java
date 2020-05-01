@@ -116,4 +116,35 @@ public class SongServiceImpl implements SongService {
         return songMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public int updateClick(Song song) {
+
+        return songMapper.updateByPrimaryKey(song);
+    }
+
+    @Override
+    public Song findById(Integer id) {
+        return songMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Page queryPageAllMusic(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+        page.setSinger((String) paramMap.get("singer"));
+        String singer = page.getSinger();
+        paramMap.put("singer",singer);
+        List<Song> datas = songMapper.queryAllMusicList(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = songMapper.queryCountAllMusic(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
+
 }
