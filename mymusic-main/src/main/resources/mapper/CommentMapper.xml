@@ -197,6 +197,7 @@
     </update>
 
 
+
     <select id="queryListContent" resultMap="BaseResultMap">
         select * from t_comment
 
@@ -206,7 +207,6 @@
 
         limit #{startIndex},#{pagesize}
     </select>
-
     <select id="queryListCount" resultType="int">
         select count(*) from t_comment
         where song_id = #{songid}
@@ -219,7 +219,7 @@
     </select>
 
     <select id="queryList" resultMap="BaseResultMap">
-        select * from t_user
+        select * from t_comment
         <where>
             <if test="queryText!=null">username like concat("%",#{queryText},"%")
             or content like concat("%",#{queryText},"%")

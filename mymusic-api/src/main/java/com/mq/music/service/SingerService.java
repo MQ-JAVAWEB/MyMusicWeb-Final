@@ -18,4 +18,8 @@ public interface SingerService {
     Singer getSingerPictureByName(String singerName);
 
     Singer querySingerById(Integer id);
+
+    Singer getSingerById(Integer id);
+
+    int updateSinger(Singer singer);
 }

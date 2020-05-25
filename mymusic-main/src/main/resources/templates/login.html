@@ -15,6 +15,17 @@
     <link th:href="@{css/style.css}" rel='stylesheet' type='text/css' media="all">
     <!--//style sheet end here-->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
+    <style>
+        #logBtn {
+            border: none;
+            background-color: #00AA88;
+            color: #fff;
+            outline: none;
+
+            padding: 0.5em 1em;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body th:style="'background:url(' + @{images/bg1.jpg} + ');'" >
 <div class="mid-class">
@@ -37,10 +48,7 @@
                     <div class="clear"></div>
                 </div>
             </div>
-            <div class="left-side-forget">
-                <input  type="checkbox" class="checked">
-                <span class="remenber-me">记住我</span>
-            </div>
+
 
             <div class="w3layouts_more-buttn">
 
@@ -49,8 +57,8 @@
 
             </div>
             <div class="clear"></div>
-            <div class="btnn">
-                <button type="button" onclick="dologin()">登录</button>
+            <div class="btn">
+                <button id="logBtn" type="button" onclick="dologin()">登录</button>
             </div>
         </form>
 
@@ -185,18 +193,16 @@
                                     window.location.href = "main"
                                 }else if("member"==result.data){
                                     window.location.href = "member"
-                                }else{
-                                    layer.msg("<a style='color:red;'>登录类型不正确！</a>", {time: 1000, icon: 2, shift: 6,});
                                 }
 
                             } else {
-                                layer.msg("<a style='color:red;'>登陆失败或存在空格！</a>", {time: 1000, icon: 2, shift: 6,});
+                                layer.msg("<a style='color:red;'>登陆失败或存在空格或登陆类型不正确！</a>", {time: 1000, icon: 2, shift: 6,});
                             }
 
 
                         },
                         error: function () {
-                            layer.msg("<a style='color:red;'>登陆失败或存在空格！</a>", {time: 1000, icon: 2, shift: 6});
+                            layer.msg("<a style='color:red;'>登陆失败或存在空格或登陆类型不正确！</a>", {time: 1000, icon: 2, shift: 6});
                         }
                     });
                 }

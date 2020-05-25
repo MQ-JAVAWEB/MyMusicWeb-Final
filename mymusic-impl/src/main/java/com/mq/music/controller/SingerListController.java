@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,38 @@ public class SingerListController {
 
 
 
+    @RequestMapping("/toUpdateSinger")
+    public String toUpdateSinger(Integer id, HttpSession session){
 
+        Singer singer=singerService.getSingerById(id);
+        session.setAttribute("singer",singer );
+
+
+        return "singer/updateSinger";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/doUpdateSinger")
+    public Object doUpdateSinger(Singer singer){
+        AjaxResult result=new AjaxResult();
+        try {
+
+
+
+            int count=singerService.updateSinger(singer);
+
+            result.setSuccess(count==1);
+
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("修改失败");
+        }
+
+
+        return result;
+    }
 
 
     public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/covers/";

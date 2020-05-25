@@ -243,8 +243,6 @@
     <update id="updateByPrimaryKey" parameterType="com.mq.music.bean.Singer">
         update t_singer
         set name = #{name,jdbcType=VARCHAR},
-        picture = #{picture,jdbcType=VARCHAR},
-        sex = #{sex,jdbcType=VARCHAR},
         introduce = #{introduce,jdbcType=VARCHAR},
         singer_type = #{singerType,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}

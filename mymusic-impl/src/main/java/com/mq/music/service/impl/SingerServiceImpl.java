@@ -61,4 +61,14 @@ public class SingerServiceImpl implements SingerService {
         return singerMapper.selectByPrimaryKey(id);
     }
 
+    @Override
+    public Singer getSingerById(Integer id) {
+        return singerMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateSinger(Singer singer) {
+        return singerMapper.updateByPrimaryKey(singer);
+    }
+
 }

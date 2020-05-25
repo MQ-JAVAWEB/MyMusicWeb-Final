@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,41 @@ public class SongListController {
     public String toAddMusic(){
         return "song/addMusic";
     }
+
+
+    @RequestMapping("/toUpdateMusic")
+    public String toUpdate(Integer id,HttpSession session){
+
+        Song song=songService.getMusicById(id);
+        session.setAttribute("song",song );
+
+
+        return "song/updateMusic";
+    }
+
+    @ResponseBody
+    @RequestMapping("/doUpdateMusic")
+    public Object doUpdateMusic(Song song){
+        AjaxResult result=new AjaxResult();
+        try {
+
+
+
+            int count=songService.updateMusic(song);
+
+            result.setSuccess(count==1);
+
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("修改失败");
+        }
+
+
+        return result;
+    }
+
+
 
     public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/";
     public final static String UPLOAD_PATH_PIC="/static/song_js/playlist/covers/";
@@ -88,7 +124,7 @@ public class SongListController {
 
 
     @RequestMapping("/doAddUserMusic")
-    public Object doAddUserMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1,Song song, HttpServletRequest request) {
+    public Object doAddUserMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1, Song song, HttpServletRequest request, HttpSession session) {
             AjaxResult result = new AjaxResult();
             song.setUrl(uploadFile.getOriginalFilename());
             song.setPic(uploadFile1.getOriginalFilename());
@@ -131,7 +167,10 @@ public class SongListController {
                 song.setSongtype(song.getSongtype());
                 int count = songService.saveMusic(song);
             if (count!=1){
+
+                result.setMessage("格式错误！");
                 return "/toAddUserMusic";
+
             }
         } catch (Exception e) {
             e.printStackTrace();

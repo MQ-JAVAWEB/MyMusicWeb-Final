@@ -24,12 +24,6 @@ public class ManagerServiceImpl implements ManagerService {
     @Autowired
     private ManagerMapper managerMapper;
 
-//    @Override
-//    public List<Messager> getAllManager() {
-//        List<Messager> list=messagerMapper.selectAll();
-//        return  list;
-//    }
-
     @Override
     public Manager queryManagerLogin(Map<String, Object> paramMap) {
         Manager manager = managerMapper.queryManagerLogin(paramMap);

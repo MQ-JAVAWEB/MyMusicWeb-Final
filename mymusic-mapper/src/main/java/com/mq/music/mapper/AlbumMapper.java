@@ -36,4 +36,8 @@ public interface AlbumMapper {
     Integer queryCount(Map paramMap);
 
     int deleteBachAlbum(Data data);
+
+    List<Album> queryAllAlbumList(Map paramMap);
+
+    Integer queryCountAllAlbum(Map paramMap);
 }

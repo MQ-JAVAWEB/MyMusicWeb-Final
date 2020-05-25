@@ -8,6 +8,8 @@ import com.mq.music.vo.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +68,15 @@ public class TuiJianServiceImpl implements TuiJianService {
     @Override
     public Tuijian getSongNameById(Integer id) {
         return tuijianMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int saveTuiJian(Tuijian tuijian) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String createtime = sdf.format(date);
+        tuijian.setCreatetime(createtime);
+        return tuijianMapper.insert(tuijian);
     }
 
 }

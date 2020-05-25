@@ -1,7 +1,7 @@
 package com.mq.music.vo;
 
 import com.mq.music.bean.*;
-
+import com.mq.music.bean.Tuijian;
 import java.util.ArrayList;
 import java.util.List;
 

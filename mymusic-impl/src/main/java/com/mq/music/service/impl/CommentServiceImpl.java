@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
         Integer startIndex = page.getStartIndex();
         paramMap.put("startIndex", startIndex);
 
-        List<Comment> datas = commentMapper.queryListContent(paramMap);
+        List<Comment> datas = commentMapper.queryList(paramMap);
 
         page.setDatas(datas);
 

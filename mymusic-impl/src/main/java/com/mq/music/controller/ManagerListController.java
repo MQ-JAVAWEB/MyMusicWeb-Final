@@ -40,21 +40,26 @@ public class ManagerListController {
     @ResponseBody
     @RequestMapping("/doUpdatePwd")
     public Object doUpdatePwd(String password,
-                               String realname, HttpSession session)
+                               String realname, HttpSession session,String newpwd)
                                {
         AjaxResult result = new AjaxResult();
         try {
-            Map<String,Object> map=new HashMap<>();
+            int i=0;
 
-            int i= (int) managerService.modifyPassword( password, realname, session);
+            if (!password.equals(newpwd)) {
+               result.setMessage("密码不一致");
+            }else {
+            i= (int) managerService.modifyPassword( password, realname, session);
+            }
 
 
-                result.setSuccess(i==1);
+
+            result.setSuccess(i==1);
 
         } catch (Exception e) {
             result.setSuccess(false);
             e.printStackTrace();
-            result.setMessage("修改密码失败");
+
         }
         return result;
     }
@@ -130,7 +135,7 @@ public class ManagerListController {
 
             if (StringUtil.isNotEmpty(queryText)) {
                 paramMap.put("queryText", queryText);
-            }
+        }
 
             Page page = managerService.queryPage(paramMap);
 

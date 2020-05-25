@@ -7,6 +7,7 @@
     <result column="songName" jdbcType="VARCHAR" property="songname" />
     <result column="singer" jdbcType="VARCHAR" property="singer" />
     <result column="createtime" jdbcType="CHAR" property="createtime" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, songName, singer, createtime
+    id, username, songName, singer, createtime, account
   </sql>
   <select id="selectByExample" parameterType="com.mq.music.bean.TuijianExample" resultMap="BaseResultMap">
     select
@@ -84,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_tuijian
     where id = #{id,jdbcType=INTEGER}
@@ -100,10 +101,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mq.music.bean.Tuijian">
-    insert into t_tuijian (id, username, songName, 
-      singer, createtime)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{songname,jdbcType=VARCHAR}, 
-      #{singer,jdbcType=VARCHAR}, #{createtime,jdbcType=CHAR})
+    insert into t_tuijian (id, username, songName,
+      singer, createtime, account
+      )
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{songname,jdbcType=VARCHAR},
+      #{singer,jdbcType=VARCHAR}, #{createtime,jdbcType=CHAR}, #{account,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mq.music.bean.Tuijian">
     insert into t_tuijian
@@ -123,6 +126,9 @@
       <if test="createtime != null">
         createtime,
       </if>
+      <if test="account != null">
+        account,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -139,6 +145,9 @@
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=CHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=CHAR},
       </if>
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -174,10 +186,11 @@
   <update id="updateByExample" parameterType="map">
     update t_tuijian
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      songName = #{record.songname,jdbcType=VARCHAR},
-      singer = #{record.singer,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=CHAR}
+    username = #{record.username,jdbcType=VARCHAR},
+    songName = #{record.songname,jdbcType=VARCHAR},
+    singer = #{record.singer,jdbcType=VARCHAR},
+    createtime = #{record.createtime,jdbcType=CHAR},
+    account = #{record.account,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=CHAR},
       </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -205,10 +221,10 @@
     set username = #{username,jdbcType=VARCHAR},
       songName = #{songname,jdbcType=VARCHAR},
       singer = #{singer,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=CHAR}
+      createtime = #{createtime,jdbcType=CHAR},
+      account = #{account,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
 
   <select id="queryList" resultMap="BaseResultMap">
     select * from t_tuijian

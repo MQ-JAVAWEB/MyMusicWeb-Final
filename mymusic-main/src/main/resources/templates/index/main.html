@@ -23,6 +23,19 @@
     <script th:src="@{js/ie/respond.min.js}"></script>
     <script th:src="@{js/ie/excanvas.js}"></script>
     <![endif]-->
+    <style>
+        .tjb {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #00AA88;
+            text-align: center;
+            line-height: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body class="" onload="pageChange()" >
@@ -185,7 +198,7 @@
                                         </div>
                                         <p style="margin-left: 2%;font-size: 25px">榜单</p>
                                         <div style="width:100%; border:1px solid red;"></div>
-                                        <div class="col-lg-6" style="margin-top: 20px;width: 45%;margin-left: 6%;">
+                                        <div class="col-lg-3" style="margin-top: 20px;width: 30%;margin-left: 6%;">
                                             <img th:src="@{images/g2.png}" style="width: 50px;height: 50px;" alt="" /><span style="font-family: '黑体';font-weight: bold;margin-left: 10px;margin-bottom: 45px">音乐新歌榜</span>
                                             <table class="table table-striped" style="margin-top: 25px ">
                                                 <thead>
@@ -201,7 +214,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="col-lg-6" style="margin-top: 20px;width: 45%;margin-left: 1%;">
+                                        <div class="col-lg-3" style="margin-top: 20px;width: 30%;margin-left: 1%;">
                                             <img th:src="@{images/g3.png}" style="width: 50px;height: 50px;" alt="" /><span style="font-family: '黑体';font-weight: bold;margin-left: 10px;margin-bottom: 45px">音乐原创榜</span>
                                             <table class="table table-striped" style="margin-top: 25px ">
                                                 <thead>
@@ -213,6 +226,22 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="tbody4">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-3" style="margin-top: 20px;width: 30%;margin-left: 1%;">
+                                            <i class="tjb">推荐榜</i><span style="font-family: '黑体';font-weight: bold;margin-left: 10px;margin-bottom: 45px">音乐推荐榜</span>
+                                            <table class="table table-striped" style="margin-top: 25px ">
+                                                <thead>
+                                                <tr>
+                                                    <td>#</td>
+                                                    <td>歌名</td>
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tbody5">
 
                                                 </tbody>
                                             </table>
@@ -263,7 +292,7 @@
         queryPageHotMusic(pageno);
         queryPageNewMusic(pageno);
         queryPageOriginalMusic(pageno);
-
+        queryPageTuiJianMusic(pageno);
     }
 
     var jsonObj = {
@@ -300,7 +329,7 @@
                                 + (i + 1) + '</td>';
                             content += '  <td>'
                                 + n.name
-                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&songname='+n.name+'&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
                             content += '  <td>'
                                 + n.album
                                 + '</td>';
@@ -359,7 +388,7 @@
                                 + (i + 1) + '</td>';
                             content += '  <td>'
                                 + n.name
-                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&songname='+n.name+'&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
                             content += '</tr>';
 
                         });
@@ -413,7 +442,7 @@
                                 + (i + 1) + '</td>';
                             content += '  <td>'
                                 + n.name
-                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&songname='+n.name+'&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
                             content += '</tr>';
 
                         });
@@ -438,6 +467,59 @@
             });
     }
 
+
+    function queryPageTuiJianMusic(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type : "POST",
+                data : jsonObj,
+                url : "TuiJianList",
+                beforeSend : function() {
+                    loadingIndex = layer.load(2, {
+                        time : 10 * 1000
+                    });
+                    return true;
+                },
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data,function(i, n) {
+
+                            content += '<tr>';
+                            content += '  <td>'
+                                + (i + 1) + '</td>';
+                            content += '  <td>'
+                                + n.songname
+                                + '<a onclick="window.location.href=\'toBofangqi?songname='+ n.songname+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                            content += '</tr>';
+
+                        });
+
+                        $("#tbody5").html(content);
+                    } else {
+                        layer.msg(result.msg, {
+                            time : 1000,
+                            icon : 5,
+                            shift : 6
+                        });
+                    }
+                },
+                error : function() {
+                    layer.msg("加载失败", {
+                        time : 1000,
+                        icon : 5,
+                        shift : 6
+                    });
+                }
+
+            });
+    }
 
 
 

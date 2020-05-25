@@ -16,4 +16,6 @@ public interface TuiJianService {
     Page queryPageTuiJianMusic(Map paramMap);
 
     Tuijian getSongNameById(Integer id);
+
+    int saveTuiJian(Tuijian tuijian);
 }

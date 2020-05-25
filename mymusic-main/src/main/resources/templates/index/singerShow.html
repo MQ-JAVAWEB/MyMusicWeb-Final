@@ -13,6 +13,7 @@
     <link rel="stylesheet" th:href="@{css/simple-line-icons.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{css/font.css}" type="text/css" />
     <link rel="stylesheet" th:href="@{css/app.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{fonts/iconfont.css}" type="text/css">
     <style>
         * {
             margin: 0;
@@ -58,12 +59,15 @@
             margin-left: 100px;
         }
         .album h2 {
-            float: left;
+
             font-size: 24px;
             font-weight: 400;
             line-height: 58px;
             font-family: 微软雅黑;
             width: 100%;
+        }
+        .album_ul {
+            position: relative;
         }
         .album_ul ul li {
             list-style: none;
@@ -72,13 +76,39 @@
         }
         .album_ul ul li a {
             text-decoration: none;
-            width: 100%;
-            height: 100%;
+            text-align: center;
             display: block;
         }
         .album_ul img {
             width: 200px;
 
+        }
+        .album_ul i {
+            display: block;
+            width: 40px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .album_ul i:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        .album_ul #prev {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+        }
+        .album_ul #next {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
         }
 
     </style>
@@ -95,8 +125,8 @@
     </style>
 </head>
 
-<body class="" onload="pageChange(1)">
-<section class="vbox">
+<body class="" onload="pageChange(1);change(1)">
+<section class="vbox" >
     <header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
         <div class="navbar-header aside bg-info dk nav-xs">
             <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
@@ -266,36 +296,19 @@
                         </table>
                         <div class="album" style="margin-bottom: 200px">
                             <h2>专辑</h2>
-                            <div class="album_ul clearfix" >
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <img src="images/18740076185638788.png"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="images/18740076185638788.png"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="images/18740076185638788.png"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="images/18740076185638788.png"/>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="images/18740076185638788.png"/>
-                                        </a>
-                                    </li>
+                            <div class="album_ul" >
+                                <div id="prev">
+
+                                </div>
+                                <ul class="clearfix" id="album-li">
+
                                 </ul>
+                                <div id="next">
+
+                                </div>
                             </div>
                         </div>
+
                     </section>
                 </section>
             </section>
@@ -318,19 +331,23 @@
         //window.location.href="${APP_PATH}/user/userList.do?pageno="+pageno
 
         queryPageMusic(pageno);
-        queryPageOriginalMusic(pageno);
+
+
 
     }
+    function change(pageno) {
+        queryPageAlbum(pageno);
+    }
     var singerPICture = $("#singerPICture").val();
-    console.log(singerPICture);
+
     var pic =document.getElementById("singerPic");
-    console.log(pic);
+
     pic.src = "song_js/playlist/covers/" + singerPICture;
     var singer = $("#pSingerName").text();
     console.log(singer);
     var jsonObj = {
         "pageno" : 1,
-        "pagesize" : 5,
+        "pagesize" : 10,
         "singer" : singer
     }
 
@@ -366,7 +383,7 @@
                                 + (i + 1) + '</td>';
                             content += '  <td>'
                                 + n.name
-                                + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
+                                + '<a onclick="window.location.href=\'toBofangqi?songname='+ n.name+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
                             content += '  <td>'
                                 + n.album
                                 + '</td>';
@@ -425,58 +442,80 @@
     }
 
 
-    // function queryPageOriginalMusic(pageno) {
-    //     jsonObj.pageno = pageno;
-    //     $
-    //         .ajax({
-    //             type : "POST",
-    //             data : jsonObj,
-    //             url : "mainOriginalMusic",
-    //             beforeSend : function() {
-    //                 loadingIndex = layer.load(2, {
-    //                     time : 10 * 1000
-    //                 });
-    //                 return true;
-    //             },
-    //             success : function(result) {
-    //                 layer.close(loadingIndex);
-    //                 if (result.success) {
-    //                     var page = result.page;
-    //                     var data = page.datas;
-    //
-    //                     var content = '';
-    //
-    //                     $.each(data,function(i, n) {
-    //
-    //                         content += '<tr>';
-    //                         content += '  <td>'
-    //                             + (i + 1) + '</td>';
-    //                         content += '  <td>'
-    //                             + n.name
-    //                             + '<a onclick="window.location.href=\'toBofangqi?id='+ n.id+ '&singer='+n.singer+'\'" ><img src="images/g4.png" height="20" width="20" style="margin-left: 10px"/></a></td>';
-    //                         content += '</tr>';
-    //
-    //                     });
-    //
-    //                     $("#tbody4").html(content);
-    //                 } else {
-    //                     layer.msg(result.msg, {
-    //                         time : 1000,
-    //                         icon : 5,
-    //                         shift : 6
-    //                     });
-    //                 }
-    //             },
-    //             error : function() {
-    //                 layer.msg("加载失败", {
-    //                     time : 1000,
-    //                     icon : 5,
-    //                     shift : 6
-    //                 });
-    //             }
-    //
-    //         });
-    // }
+    function queryPageAlbum(pageno) {
+        jsonObj.pageno = pageno;
+        $
+            .ajax({
+                type : "POST",
+                data : jsonObj,
+                url : "SingerAlbum",
+                beforeSend : function() {
+                    loadingIndex = layer.load(2, {
+                        time : 10 * 1000
+                    });
+                    return true;
+                },
+                success : function(result) {
+                    layer.close(loadingIndex);
+                    if (result.success) {
+                        var page = result.page;
+                        var data = page.datas;
+
+                        var content = '';
+
+                        $.each(data,function(i, n) {
+
+
+
+                            content += '<li><a href="#">';
+                            content += '<img src="AlbumPicture/'+n.picture+'"/>';
+                            content += ' </a></li> ';
+
+
+                        });
+
+                        $("#album-li").html(content);
+
+                        var contentBar = '';
+                        var next = '';
+                        if (page.pageno == 1) {
+                            contentBar += '<i class="iconfont icon-xiazai6 "></i>';
+                        } else {
+                            contentBar += '<i class="iconfont icon-xiazai6"  onclick="change('
+                                + (pageno - 1) + ')"></i>';
+                        }
+
+                        if (page.pageno == page.totalno) {
+                            next += '<i class="iconfont icon-erjiyemianjiantou01"></i>';
+                        } else {
+                            next += '<i class="iconfont icon-erjiyemianjiantou01" onclick="change('
+                                + (pageno + 1) + ')"></i>';
+                        }
+
+                        $("#prev").html(contentBar);
+                        $("#next").html(next);
+
+                    } else {
+                        layer.msg(result.msg, {
+                            time : 1000,
+                            icon : 5,
+                            shift : 6
+                        });
+                    }
+                },
+                error : function() {
+                    layer.msg("加载失败", {
+                        time : 1000,
+                        icon : 5,
+                        shift : 6
+                    });
+                }
+
+            });
+    }
+
+
+
 
 </script>
 </body>

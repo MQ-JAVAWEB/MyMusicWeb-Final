@@ -52,4 +52,6 @@ public interface SongMapper {
     List<Song> queryAllMusicList(Map paramMap);
 
     Integer queryCountAllMusic(Map paramMap);
+
+    Song selectByPrimaryName(String name, String singer);
 }

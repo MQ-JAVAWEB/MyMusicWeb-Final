@@ -71,9 +71,9 @@
                     </li>
                     <li class="list-group-item tree-closed">
                         <span><i class="glyphicon glyphicon glyphicon-tasks"></i> 信息管理 <span class="badge"
-                                                                                             style="float:right">3</span></span>
+                                                                                             style="float:right"></span></span>
                         <ul style="margin-top:10px;display:none;">
-                            <li style="height:30px;">
+                            <li style="height:30px;" th:if="${session.Manager.username}=='superadmin'">
                                 <a th:href="@{toManagerList}"><i class="glyphicon glyphicon-user"></i> 管理员维护</a>
                             </li>
                             <li style="height:30px;">
@@ -89,7 +89,7 @@
                     </li>
                     <li class="list-group-item tree-closed">
                         <span><i class="glyphicon glyphicon-ok"></i> 音乐管理 <span class="badge"
-                                                                                style="float:right">3</span></span>
+                                                                                style="float:right"></span></span>
                         <ul style="margin-top:10px;display:none;">
                             <li style="height:30px;">
                                 <a th:href="@{toMusicList}"><i class="glyphicon glyphicon-check"></i> 音乐维护</a>
@@ -235,7 +235,7 @@
                                 + n.songname
                                 + '</td>';
                             content += '  <td>'
-                                + n.singer + '</td>';
+                                + n.account + '</td>';
                             content += '  <td>';
                             content += '	  <button type="button" onclick="deleteTuiJian('
                                 + n.id
@@ -305,7 +305,7 @@
     function deleteTuiJian(id, username) {
 
         layer.confirm(
-            "确认要删除[" + username + "]管理员吗？",
+            "确认要删除[" + username + "]的推荐吗？",
             {
                 icon: 3,
                 title: '提示'

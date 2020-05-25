@@ -16,4 +16,10 @@ public interface AlbumService {
     int deleteAlbum(Integer id);
 
     int saveAlbum(Album album);
+
+    Page queryPageAllAlbum(Map paramMap);
+
+    Album getAlbumById(Integer id);
+
+    int updateAlbum(Album album);
 }

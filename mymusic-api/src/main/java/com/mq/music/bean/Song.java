@@ -94,4 +94,6 @@ public class Song implements Serializable {
     public void setPic(String pic) {
         this.pic = pic == null ? null : pic.trim();
     }
+
+
 }

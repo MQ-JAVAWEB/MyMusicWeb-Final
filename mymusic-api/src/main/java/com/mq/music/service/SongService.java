@@ -28,4 +28,10 @@ public interface SongService {
     Song findById(Integer id);
 
     Page queryPageAllMusic(Map paramMap);
+
+    Song getSong(String name, String singer);
+
+    Song getMusicById(Integer id);
+
+    int updateMusic(Song song);
 }

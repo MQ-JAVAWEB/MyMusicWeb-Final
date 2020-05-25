@@ -147,4 +147,23 @@ public class SongServiceImpl implements SongService {
         return page;
     }
 
+    @Override
+    public Song getSong(String name, String singer) {
+        return songMapper.selectByPrimaryName(name,singer);
+    }
+
+    @Override
+    public Song getMusicById(Integer id) {
+        return songMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateMusic(Song song) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        String createtime = sdf.format(date);
+        song.setCreatetime(createtime);
+        return songMapper.updateByPrimaryKey(song);
+    }
+
 }

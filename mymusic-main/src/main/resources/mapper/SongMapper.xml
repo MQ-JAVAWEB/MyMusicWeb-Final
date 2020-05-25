@@ -264,12 +264,9 @@
     update t_song
     set name = #{name,jdbcType=VARCHAR},
       singer = #{singer,jdbcType=VARCHAR},
-      clickNum = #{clicknum,jdbcType=INTEGER},
-      url = #{url,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=CHAR},
       songType = #{songtype,jdbcType=VARCHAR},
-      album = #{album,jdbcType=VARCHAR},
-      pic = #{pic,jdbcType=VARCHAR}
+      album = #{album,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   
@@ -364,5 +361,13 @@
   <select id="queryCountAllMusic" resultType="int">
     select count(*) from t_song
     where singer = #{singer}
+  </select>
+
+  <select id="selectByPrimaryName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_song
+    where name = #{name,jdbcType=VARCHAR} and  singer = #{singer,jdbcType=VARCHAR}
+    limit 1;
   </select>
 </mapper>

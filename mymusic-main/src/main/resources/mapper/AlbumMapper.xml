@@ -220,8 +220,6 @@
         update t_album
         set singer = #{singer,jdbcType=VARCHAR},
         albumName = #{albumName,jdbcType=VARCHAR},
-
-        picture = #{picture,jdbcType=VARCHAR},
         introduce = #{introduce,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -256,4 +254,19 @@
         </foreach>
     </delete>
 
+
+    <select id="queryAllAlbumList" resultMap="BaseResultMap">
+    select * from t_album
+    where singer  = #{singer}
+    order by id DESC
+
+    limit #{startIndex},#{pagesize}
+  </select>
+
+
+
+    <select id="queryCountAllAlbum" resultType="int">
+    select count(*) from t_album
+    where singer = #{singer}
+  </select>
 </mapper>

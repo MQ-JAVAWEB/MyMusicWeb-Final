@@ -72,15 +72,26 @@ public class UserController {
 
 
     @RequestMapping("/toBofangqi")
-    public String toBofangqi( Integer id,Map map,@RequestParam("singer") String singerName){
-        Song song=songService.getSongById(id);
+    public String toBofangqi( Integer id,Map map,@RequestParam("songname")String name,String singer){
+        Song songid = songService.getSong(name,singer);
+//        if (songid.getId()==id) {
+//            Song song=songService.getSongById(id);
+//
+//            int count =song.getClicknum();
+//            count ++;
+//            song.setClicknum(count);
+//            songService.updateClick(song);
+//
+//            map.put("song",song);
+//        }else  {
+            int count =songid.getClicknum();
+            count ++;
+            songid.setClicknum(count);
+            songService.updateClick(songid);
 
-        int count =song.getClicknum();
-        count ++;
-        song.setClicknum(count);
-        int  click= songService.updateClick(song);
+            map.put("song",songid);
+//        }
 
-        map.put("song",song);
 
         return "index/bofang";
     }
@@ -231,31 +242,6 @@ public class UserController {
         }
         return result;
     }
-
-//    @ResponseBody
-//    @RequestMapping("/mainTuiJianMusic")
-//    public Object mainTuiJianMusic(@RequestParam(value = "pageno", required = false, defaultValue = "1") Integer pageno,
-//                                    @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize
-//    ) {
-//        AjaxResult result = new AjaxResult();
-//        try {
-//
-//            Map paramMap = new HashMap();
-//            paramMap.put("pageno", pageno);
-//            paramMap.put("pagesize", pagesize);
-//            //paramMap.put("queryText", queryText);
-//
-//            Page page = tuiJianService.queryPageTuiJianMusic(paramMap);
-//
-//            result.setSuccess(true);
-//            result.setPage(page);
-//        } catch (Exception e) {
-//            result.setSuccess(false);
-//            e.printStackTrace();
-//            result.setMessage("查询失败");
-//        }
-//        return result;
-//    }
 
 
 }

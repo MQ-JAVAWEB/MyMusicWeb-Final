@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,41 @@ public class AlbumListController {
         return "album/addAlbum";
     }
 
+
+
+
+    @RequestMapping("/toUpdateAlbum")
+    public String toUpdateAlbum(Integer id, HttpSession session){
+
+        Album album=albumService.getAlbumById(id);
+        session.setAttribute("album",album );
+
+
+        return "album/updateAlbum";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/doUpdateAlbum")
+    public Object doUpdateAlbum(Album album){
+        AjaxResult result=new AjaxResult();
+        try {
+
+
+
+            int count=albumService.updateAlbum(album);
+
+            result.setSuccess(count==1);
+
+        } catch (Exception e) {
+            result.setSuccess(false);
+            e.printStackTrace();
+            result.setMessage("修改失败");
+        }
+
+
+        return result;
+    }
 
     public final static String UPLOAD_PATH_PREFIX="/static/AlbumPicture/";
     @RequestMapping("/doAddAlbum")

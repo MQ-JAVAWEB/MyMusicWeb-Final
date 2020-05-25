@@ -42,4 +42,6 @@ public interface CommentMapper {
     List<Comment> queryListContent(Map paramMap);
 
     Integer queryListCount(Map paramMap);
+
+
 }

@@ -94,9 +94,7 @@
 
     <select id="queryCount" resultType="int">
         select count(*) from t_manager
-        <where>
-            <if test="queryText!=null">username like concat("%",#{queryText},"%")</if>
-        </where>
+
     </select>
 
     <delete id="deleteManagerBatch">

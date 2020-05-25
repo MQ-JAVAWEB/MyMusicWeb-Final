@@ -49,4 +49,34 @@ public class AlbumServiceImpl implements AlbumService {
     public int saveAlbum(Album album) {
         return albumMapper.insert(album);
     }
+
+    @Override
+    public Page queryPageAllAlbum(Map paramMap) {
+        Page page = new Page((Integer) paramMap.get("pageno"), (Integer) paramMap.get("pagesize"));
+
+        Integer startIndex = page.getStartIndex();
+        paramMap.put("startIndex", startIndex);
+        page.setSinger((String) paramMap.get("singer"));
+        String singer = page.getSinger();
+        paramMap.put("singer",singer);
+        List<Album> datas = albumMapper.queryAllAlbumList(paramMap);
+
+        page.setDatas(datas);
+
+        Integer totalsize = albumMapper.queryCountAllAlbum(paramMap);
+
+        page.setTotalsize(totalsize);
+
+        return page;
+    }
+
+    @Override
+    public Album getAlbumById(Integer id) {
+        return albumMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int updateAlbum(Album album) {
+        return albumMapper.updateByPrimaryKey(album);
+    }
 }
