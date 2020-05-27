@@ -181,7 +181,9 @@
                                     <div class="col-md-8 col-xs-12">
                                         <div class="white-box">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"></div></div>
+                                                <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal">
+                                                    <span th:if="${session.msg}==1" style="color: red;">上传音乐或图片格式错误，请重新上传</span>
+                                                </div></div>
                                                 <div class="panel-body">
                                                     <form id="addForm" enctype="multipart/form-data" th:action="@{/doAddUserMusic(singer=${session.User.username})}" method="post">
                                                         <div class="form-group">
@@ -190,7 +192,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="fsinger">所属歌手</label>
-                                                            <input type="text" class="form-control" name="singer" id="fsinger" disabled th:value="${session.User.username}">
+                                                            <input type="text" class="form-control" name="singer" id="fsinger" disabled="disabled" th:value="${session.User.username}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="fsongType" >音乐类型:</label>&nbsp;

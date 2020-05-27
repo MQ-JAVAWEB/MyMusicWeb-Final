@@ -104,7 +104,7 @@
                 <li class="active">新增</li>
             </ol>
             <div class="panel panel-default">
-                <div class="panel-heading">表单数据
+                <div class="panel-heading">表单数据&nbsp;&nbsp;&nbsp;<span th:if="${session.msg}==1" style="color: red;">上传音乐或图片格式错误，请重新上传</span>
                     <div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i
                             class="glyphicon glyphicon-question-sign"></i></div>
                 </div>

@@ -75,9 +75,10 @@ public class SingerListController {
 
     public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/covers/";
     @RequestMapping("/doAddSinger")
-    public Object doAddSinger(@RequestParam("uploadFile") MultipartFile uploadFile, Singer singer, HttpServletRequest request) {
+    public Object doAddSinger(@RequestParam("uploadFile") MultipartFile uploadFile, Singer singer, HttpServletRequest request,HttpSession session) {
         AjaxResult result = new AjaxResult();
         singer.setPicture(uploadFile.getOriginalFilename());
+        String[] picArray = singer.getPicture().split("\\.");
         try {
             if (uploadFile.isEmpty()){
                 result.setMessage("请选择上传文件！");
@@ -98,9 +99,14 @@ public class SingerListController {
             uploadFile.transferTo(newFile);
             String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/song_js/playlist/covers/" + newUrlName;
             singer.setPicture(newUrlName);
+            int count = 0;
+            if ("jpg".equals(picArray[1])){
+               count= singerService.saveSinger(singer);
+            }
 
-            int count = singerService.saveSinger(singer);
             if (count!=1){
+                int msg=1;
+                session.setAttribute("msg",msg);
                 return "singer/addSinger";
             }
         } catch (Exception e) {

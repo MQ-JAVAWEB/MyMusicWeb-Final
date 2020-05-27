@@ -74,16 +74,7 @@ public class UserController {
     @RequestMapping("/toBofangqi")
     public String toBofangqi( Integer id,Map map,@RequestParam("songname")String name,String singer){
         Song songid = songService.getSong(name,singer);
-//        if (songid.getId()==id) {
-//            Song song=songService.getSongById(id);
 //
-//            int count =song.getClicknum();
-//            count ++;
-//            song.setClicknum(count);
-//            songService.updateClick(song);
-//
-//            map.put("song",song);
-//        }else  {
             int count =songid.getClicknum();
             count ++;
             songid.setClicknum(count);

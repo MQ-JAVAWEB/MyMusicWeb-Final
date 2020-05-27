@@ -74,9 +74,10 @@ public class AlbumListController {
 
     public final static String UPLOAD_PATH_PREFIX="/static/AlbumPicture/";
     @RequestMapping("/doAddAlbum")
-    public Object doAddAlbum(@RequestParam("uploadFile") MultipartFile uploadFile, Album album, HttpServletRequest request) {
+    public Object doAddAlbum(@RequestParam("uploadFile") MultipartFile uploadFile, Album album, HttpServletRequest request,HttpSession session) {
         AjaxResult result = new AjaxResult();
         album.setPicture(uploadFile.getOriginalFilename());
+        String[] picArray = album.getPicture().split("\\.");
         try {
             if (uploadFile.isEmpty()){
                 result.setMessage("请选择上传文件！");
@@ -96,11 +97,18 @@ public class AlbumListController {
             uploadFile.transferTo(newFile);
             String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/AlbumPicture/" + pictureName;
             album.setPicture(pictureName);
-
-            int count = albumService.saveAlbum(album);
-            if (count!=1){
-                return "/toAddAlbum";
+            int count = 0;
+            if ("jpg".equals(picArray[1])){
+                count = albumService.saveAlbum(album);
             }
+
+            if (count!=1){
+                int msg=1;
+                session.setAttribute("msg",msg);
+                return "redirect:/toAddAlbum";
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

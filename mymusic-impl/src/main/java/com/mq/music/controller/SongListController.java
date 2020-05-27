@@ -71,10 +71,12 @@ public class SongListController {
     public final static String UPLOAD_PATH_PREFIX="/static/song_js/playlist/";
     public final static String UPLOAD_PATH_PIC="/static/song_js/playlist/covers/";
     @RequestMapping("/doAddMusic")
-    public Object doAddMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1, Song song, HttpServletRequest request) {
+    public Object doAddMusic(@RequestParam("uploadFile") MultipartFile uploadFile, @RequestParam("uploadFile1") MultipartFile uploadFile1, Song song, HttpServletRequest request,HttpSession session) {
         AjaxResult result = new AjaxResult();
         song.setUrl(uploadFile.getOriginalFilename());
         song.setPic(uploadFile1.getOriginalFilename());
+        String[] urlArray= song.getUrl().split("\\.");
+        String[] picArray= song.getPic().split("\\.");
         try {
             if (uploadFile.isEmpty()){
                 result.setMessage("请选择上传文件！");
@@ -111,9 +113,15 @@ public class SongListController {
             song.setUrl(newUrlName);
             song.setPic(newPicName);
             song.setSongtype(song.getSongtype());
-            int count = songService.saveMusic(song);
+            int count =0;
+            if ("mp3".equals(urlArray[1])&&"jpg".equals(picArray[1])){
+                count = songService.saveMusic(song);
+            }
+
             if (count!=1){
-                return "/toAddMusic";
+                int msg=1;
+                session.setAttribute("msg",msg);
+                return "redirect:/toAddMusic";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +136,8 @@ public class SongListController {
             AjaxResult result = new AjaxResult();
             song.setUrl(uploadFile.getOriginalFilename());
             song.setPic(uploadFile1.getOriginalFilename());
-
+            String[] urlArray= song.getUrl().split("\\.");
+            String[] picArray= song.getPic().split("\\.");
             try {
                 if (uploadFile.isEmpty()){
                     result.setMessage("请选择上传文件！");
@@ -165,11 +174,15 @@ public class SongListController {
                 song.setUrl(newUrlName);
                 song.setPic(newPicName);
                 song.setSongtype(song.getSongtype());
-                int count = songService.saveMusic(song);
-            if (count!=1){
+                int count=0;
+                if ("mp3".equals(urlArray[1])&&"jpg".equals(picArray[1])){
+                    count = songService.saveMusic(song);
+                }
 
-                result.setMessage("格式错误！");
-                return "/toAddUserMusic";
+            if (count!=1){
+                int msg=1;
+                session.setAttribute("msg",msg);
+                return "redirect:/toAddUserMusic";
 
             }
         } catch (Exception e) {
